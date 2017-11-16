@@ -8,11 +8,17 @@ import org.eclipse.swt.widgets.*;
 //TODO - build a gui manager and make these windows into different methods
 public class MainWnd
 {	
-	private static Shell shell = new Shell();
-	private static Label label2 = new Label(shell, SWT.NONE);
-	private static Label label = new Label(shell, SWT.NONE);
-	private static Text text = new Text(shell, SWT.NONE);
-	WindowManager WindowManager = new WindowManager(guiInfo);
+	private Shell shell = new Shell();
+	private Button button1 = new Button(shell, SWT.PUSH);
+	private Button button2 = new Button(shell, SWT.PUSH);
+	private Button button3 = new Button(shell, SWT.PUSH);
+	private Button button4 = new Button(shell, SWT.PUSH);
+	private Button button5 = new Button(shell, SWT.PUSH);
+	private Label label2 = new Label(shell, SWT.NONE);
+	private Label label1 = new Label(shell, SWT.NONE);
+	private Text text = new Text(shell, SWT.NONE);
+	//guiInfo guiinfo = new guiInfo(button1, button2, button3, button4, button5, text, label1, label2);
+	WindowManager windowmanager;
 	Runner runner;
 	ArrayList<Building> buildings = new ArrayList<>();
 	Map map = new Map();
@@ -24,7 +30,31 @@ public class MainWnd
 		this.player = player;
 	}
 	
-	public MainWnd(int windowType)
+	public void refreshWindow()
+	{
+		/*
+		button1 = guiinfo.getButton1();
+		button2 = guiinfo.getButton2();
+		button3 = guiinfo.getButton3();
+		button4 = guiinfo.getButton4();
+		button5 = guiinfo.getButton5();
+		label1 = guiinfo.getLabel1();
+		label2 = guiinfo.getLabel2();
+		text = guiinfo.getText();
+		shell.redraw();
+		*/
+		
+		button1 = windowmanager.getButton1();
+		button2 = windowmanager.getButton2();
+		button3 = windowmanager.getButton3();
+		button4 = windowmanager.getButton4();
+		label1 = windowmanager.getLabel1();
+		label2 = windowmanager.getLabel2();
+		text = windowmanager.getText();
+		shell.redraw();
+	}
+	
+	public MainWnd()
 	{
 		//Runner runner = new Runner();
 		final Display display = Display.getDefault();
@@ -37,16 +67,76 @@ public class MainWnd
         	e.printStackTrace();
         }
 		
-		WindowManager.switchToMenuWindow(shell, label, label2, text, display);
+		windowmanager = new WindowManager(shell, display);
+		windowmanager.switchToMenuWindow();
+		refreshWindow();
+		//creating all the listeners for buttons and the text box
+		button1.addSelectionListener(new SelectionAdapter()
+		{
+			@Override
+			public void widgetSelected(SelectionEvent e)
+			{
+				label2.setText("Starting game!");
+				windowmanager.switchToMainWindow();
+				//call other Window correctly
+			}
+		});
+		button2.addSelectionListener(new SelectionAdapter()
+		{
+			@Override
+			public void widgetSelected(SelectionEvent e)
+			{
+				label2.setText("ZOOM");
+				
+				//call other Window correctly
+			}
+		});
+		button3.addSelectionListener(new SelectionAdapter()
+		{
+			@Override
+			public void widgetSelected(SelectionEvent e)
+			{
+				label2.setText("wooooopppp");
+				
+				//call other Window correctly
+			}
+		});
+		button4.addSelectionListener(new SelectionAdapter()
+		{
+			@Override
+			public void widgetSelected(SelectionEvent e)
+			{
+				label2.setText("zzzzzzzzzzzzzzzzzzzzzzzzzzzz");
+				
+			}
+		});
+		text.addListener(SWT.Traverse, new Listener()
+		{
+			@Override
+			public void handleEvent(Event event)
+			{
+				if(event.detail == SWT.TRAVERSE_RETURN)
+				{
+					
+				
+					System.out.println("ENTER PRESSED!");
+					System.out.println(text.getText());
+					//Runner.Evaluate(label, text.getText());
+					//^^^^^^^^very important!^^^^^^^^^^^^^^
+					text.setText("");
+				}
+			}
+		});
+		
+		
+		
+		
+		
 		
 		//shell.setLayout(new FillLayout());
 		
 		//label2 = new Label(shell, SWT.NONE);
-		//0 for main game window, 1 for menu
-		
-		
-		//implement windowmanager here
-		
+		//0 for main game window, 1 for menu		
 		
 		//opening the shell
 		shell.setBounds(100, 100, 800, 315);
@@ -79,10 +169,7 @@ public class MainWnd
 	{
 		return this.text;
 	}
-	public void setLabel(Label label)
-	{
-		this.label = label;
-	}
+
 	
 	
 	//unused getters and setters
