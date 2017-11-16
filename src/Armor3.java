@@ -1,3 +1,7 @@
+/*
+ this class was imported on 11/16/2017 by Kayden
+ */
+
 public class Armor3 extends Armor{
 
 public Armor3(){

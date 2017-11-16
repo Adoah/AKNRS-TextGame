@@ -2,10 +2,12 @@ import java.util.ArrayList;
 
 public class Room 
 {
-	private static ArrayList<Consumable> Consumables = new ArrayList<>();
-	private static ArrayList<Utility> Utilities = new ArrayList<>();
-	private static ArrayList<Animal> Animals = new ArrayList<>();
-	private static ArrayList<Weapon> Weapons = new ArrayList<>();
+	private ArrayList<Consumable> Consumables = new ArrayList<>();
+	private ArrayList<Utility> Utilities = new ArrayList<>();
+	private ArrayList<Animal> Animals = new ArrayList<>();
+	private ArrayList<Weapon> Weapons = new ArrayList<>();
+	private ArrayList<Armor> Armor = new ArrayList<>();
+	
 	
 	public Room()
 	{
