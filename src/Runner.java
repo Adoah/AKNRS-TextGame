@@ -15,15 +15,7 @@ public class Runner
 		Splash splash = new Splash();
 		//splash.stayFrosty();
 		//splash.enceLogo();
-		Menu menu = new Menu();
 		Scanner input  = new Scanner(System.in);
-		int option = 100; //holds user input for menu option
-		do
-		{
-			menu.drawMenu();
-			option = input.nextInt();
-			menu.selection(option);
-		}while(option != 5);
 		MainWnd MainWindow = new MainWnd(1);
 		Gameplay gameplay = new Gameplay(MainWindow);
 	}	
