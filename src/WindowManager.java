@@ -45,14 +45,14 @@ public class WindowManager
 		//label2.setFont(font);
 		label2.setText("Welcome to my game!\nSelect what you want to do!");
 		label2.setBounds(0, 0, 800, 50);
-		label2.setToolTipText("Welcome to my game!\\nSelect what you want to do!");
+		label2.setToolTipText("Welcome to my game! Select what you want to do!");
 		label2.setBackground(display.getSystemColor(SWT.COLOR_DARK_GRAY));		
 		button1.setText("Start the game!");
 		button1.setBounds(0, 50, 150, 50);
 		button2.setText("Resume your previous game!");
-		button2.setBounds(150, 50, 150, 50);
+		button2.setBounds(150, 50, 200, 50);
 		button3.setText("Change the colors!");
-		button3.setBounds(300, 50, 200, 50);
+		button3.setBounds(350, 50, 150, 50);
 		button4.setText("Quit");
 		button4.setBounds(500, 50, 75, 50);
 		text.setBounds(0, 0, 0, 0);
@@ -89,7 +89,9 @@ public class WindowManager
 		button1.setBounds(50, 250, 80, 60);
 		button2.setBounds(0, 0, 0, 0);
 		button3.setBounds(0, 0, 0, 0);
-		button4.setBounds(0, 0, 0, 0);
+		button4.setBounds(130, 250, 80, 60);
+		button4.setText("Quit");
+		shell.setBounds(80, 80, 1280, 720);
 	}
 	
 	public int getWindowStatus()

@@ -5,7 +5,7 @@ import org.eclipse.swt.events.*;
 import org.eclipse.swt.graphics.*;
 import org.eclipse.swt.layout.*;
 import org.eclipse.swt.widgets.*;
-//TODO - build a gui manager and make these windows into different methods
+
 public class MainWnd
 {	
 	private Shell shell = new Shell();
@@ -52,8 +52,12 @@ public class MainWnd
 		label2 = windowmanager.getLabel2();
 		text = windowmanager.getText();
 		shell.redraw();
+		shell.layout();
 	}
-	
+	//TODO - get it to redraw the window properly. something is being really stupid
+	//TODO - get the text box to work
+	//TODO - get all the buttons working
+	//seems like everything stays after the redraw, and all the things added by the redraw function don't work
 	public MainWnd()
 	{
 		//Runner runner = new Runner();
@@ -61,11 +65,6 @@ public class MainWnd
 		//shell = new Shell(display);
 		Splash splash = new Splash();
 		splash.splashScreen();
-		try {
-            Thread.sleep(2000);
-        } catch (InterruptedException e) {
-        	e.printStackTrace();
-        }
 		
 		windowmanager = new WindowManager(shell, display);
 		windowmanager.switchToMenuWindow();
@@ -78,6 +77,9 @@ public class MainWnd
 			{
 				label2.setText("Starting game!");
 				windowmanager.switchToMainWindow();
+				refreshWindow();
+				//shell.layout();
+				//shell.redraw();
 				//call other Window correctly
 			}
 		});
@@ -117,12 +119,8 @@ public class MainWnd
 			{
 				if(event.detail == SWT.TRAVERSE_RETURN)
 				{
-					
-				
 					System.out.println("ENTER PRESSED!");
 					System.out.println(text.getText());
-					//Runner.Evaluate(label, text.getText());
-					//^^^^^^^^very important!^^^^^^^^^^^^^^
 					text.setText("");
 				}
 			}
