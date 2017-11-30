@@ -1,3 +1,9 @@
+/*
+ * 
+ * last updated by Kayden on 11/30/2017 added array lists Armor and Crate
+ * 
+ */
+
 import java.util.ArrayList;
 
 public class Room 
@@ -7,6 +13,7 @@ public class Room
 	private ArrayList<Animal> Animals = new ArrayList<>();
 	private ArrayList<Weapon> Weapons = new ArrayList<>();
 	private ArrayList<Armor> Armor = new ArrayList<>();
+	private ArrayList<Crate> Crate = new ArrayList<>();
 	
 	
 	public Room()
@@ -125,6 +132,54 @@ public class Room
 	public void addAnimal(Animal animal)
 	{
 		Animals.add(animal);
+	}
+	
+	public ArrayList<Armor> getArmor() 
+	{
+		return Armor;
+	}
+	public void setArmor(ArrayList<Armor> armor) 
+	{
+		Armor = armor;
+	}
+	public void addArmor(int armor)
+	{
+		for (int i = 0; i < armor; i++)
+		{
+			Armor.add(new Armor());
+		}
+	}
+	public Armor getArmor(int index)
+	{
+		return Armor.get(index);
+	}
+	public void addArmor(Armor armor)
+	{
+		Armor.add(armor);
+	}
+	
+	public ArrayList<Crate> getCrate() 
+	{
+		return Crate;
+	}
+	public void setCrate(ArrayList<Crate> crate) 
+	{
+		Crate = crate;
+	}
+	public void addCrate(int crate)
+	{
+		for (int i = 0; i < crate; i++)
+		{
+			Crate.add(new Crate());
+		}
+	}
+	public Crate getCrate(int index)
+	{
+		return Crate.get(index);
+	}
+	public void addCrate(Crate crate)
+	{
+		Crate.add(crate);
 	}
 	
 	public String toString()
