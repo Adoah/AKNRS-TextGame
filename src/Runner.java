@@ -15,8 +15,8 @@ public class Runner
 		Splash splash = new Splash();
 		//splash.stayFrosty();
 		//splash.enceLogo();
-		Scanner input  = new Scanner(System.in);
-		MainWnd MainWindow = new MainWnd(1);
+		//Scanner input  = new Scanner(System.in);
+		MainWnd MainWindow = new MainWnd();
 		Gameplay gameplay = new Gameplay(MainWindow);
 	}	
 	public void Wait(double timer)
