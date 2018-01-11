@@ -15,7 +15,6 @@ public class Building
 			Floors.add(new Floor());
 		}
 	}
-
 	public ArrayList<Floor> getFloors() 
 	{
 		return Floors;

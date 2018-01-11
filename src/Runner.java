@@ -1,5 +1,4 @@
 import java.util.ArrayList;
-import org.eclipse.swt.widgets.Label;
 import java.util.Scanner;
 /*
  * this class runs the program.
@@ -13,11 +12,8 @@ public class Runner
 	public static void main(String[] args)
 	{
 		Splash splash = new Splash();
-		//splash.stayFrosty();
-		//splash.enceLogo();
-		//Scanner input  = new Scanner(System.in);
-		MainWnd MainWindow = new MainWnd();
-		Gameplay gameplay = new Gameplay(MainWindow);
+		splash.splashScreen();
+		Gameplay gameplay = new Gameplay();
 	}	
 	public void Wait(double timer)
 	{
