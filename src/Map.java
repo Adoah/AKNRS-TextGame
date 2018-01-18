@@ -5,7 +5,13 @@ public class Map
 	private Zone belowGround[][] = new Zone[25][25];
 	public Map()
 	{
-		
+		for(int i = 0; i < 25; i++)
+		{
+			for(int j = 0; j < 25; j++)
+			{
+				aboveGround[i][j] = new Zone();
+			}
+		}
 	}
 	public Zone[][] getAboveGround() 
 	{

@@ -33,12 +33,13 @@ public class Gameplay
 		animals.get(3).setTemperament("relaxed");
 		animals.get(4).setTemperament("lunatic");
 		
-		map.getAboveGroundAtPos(0, 0).getBuildings().add(new Building(2));
-		map.getAboveGroundAtPos(0, 0).getBuildings().get(0).getFloor(0).addRooms(2);
-		map.getAboveGroundAtPos(0, 0).getBuildings().get(0).getFloor(1).addRooms(2);
-		map.getAboveGroundAtPos(0, 0).getBuildings().get(0).getFloor(1).getRoom(0).addWeapon(new Rifle());
-		map.getAboveGroundAtPos(0, 0).getBuildings().get(0).getFloor(1).getRoom(1).addAnimal(new Human("Bozo", "clown"));
-		map.getAboveGroundAtPos(0, 0).getBuildings().get(0).getFloor(0).getRoom(0).addAnimal(new Human("JOIJIO", "lkadsf"));
+		//map.getAboveGroundAtPos(0, 0).getBuildings().add(new Building(2));
+		map.getAboveGroundAtPos(0, 0).addBuildings(2);
+		map.getAboveGroundAtPos(0, 0).getBuilding(0).getFloor(0).addRooms(2);
+		map.getAboveGroundAtPos(0, 0).getBuilding(0).getFloor(1).addRooms(2);
+		map.getAboveGroundAtPos(0, 0).getBuilding(0).getFloor(1).getRoom(0).addWeapon(new Rifle());
+		map.getAboveGroundAtPos(0, 0).getBuilding(0).getFloor(1).getRoom(1).addAnimal(new Human("Bozo", "clown"));
+		map.getAboveGroundAtPos(0, 0).getBuilding(0).getFloor(0).getRoom(0).addAnimal(new Human("JOIJIO", "lkadsf"));
 	}
 	public void turn()
 	{

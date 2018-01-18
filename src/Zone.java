@@ -20,6 +20,13 @@ public class Zone
 	{
 		return buildings;
 	}
+	public void addBuildings(int number)
+	{
+		for(int i = 0; i < number; i++)
+		{
+			this.buildings.add(new Building());
+		}
+	}
 	public void setBuildings(ArrayList<Building> buildings) 
 	{
 		this.buildings = buildings;
