@@ -11,13 +11,12 @@ public class Gameplay
 	public Gameplay()
 	{
 		init();
+		turn();
 	}
 	//full world generation.
 	//might make it progressive in the future.
 	public void init()
 	{
-		Random random = new Random();
-		Player player = new Player();
 		ArrayList<Animal> animals = new ArrayList<>();
 		ArrayList<Weapon> weapons = new ArrayList<>();
 		
@@ -63,10 +62,10 @@ public class Gameplay
 		//prints the description of the zone that the player has entered.
 		map.getAboveGroundAtPos(player.getPosition()).toString();
 
-		//parse the input, so that if it is left, right, forward, or back, then it reduces the string to just that.
 		String input = in.nextLine().toLowerCase();
+		String parsed = parseInput(input);
 		//moving between rooms in buildings
-		if(input.equals("left") || input.equals("right") || input.equals("forward") || input.equals("back")) 
+		if(parsed.equals("left") || parsed.equals("right") || parsed.equals("forward") || parsed.equals("back")) 
 		{
 			int target = map.getAboveGroundAtPos(player.getPosition()).getBuilding(player.getCurrentBuilding()).getFloor(player.getCurrentFloor()).getRoom(player.getCurrentRoom()).getRoomInDirection(input);
 			if(target != -1)
@@ -75,9 +74,33 @@ public class Gameplay
 			}
 			map.getAboveGroundAtPos(player.getPosition()).getBuilding(player.getCurrentBuilding()).getFloor(player.getCurrentFloor()).getRoom(player.getCurrentRoom()).toString();
 		}
+		//TODO have to build for switching floors
+		//TODO have to build for switching buildings
 		
 		//if floor++ or floor--, then say something like, you climb up the stairs
 		//same thing when changing rooms, say something like, "you enter a room with" ....
 		
+	}
+	
+	public String parseInput(String input)
+	{
+		//reduces the input string to left, right, front or back for simplicity and other code compatibility.
+		if(input.contains("left"))
+		{
+			return "left";
+		}
+		else if(input.contains("right"))
+		{
+			return "right";
+		}
+		else if(input.contains("forward"))
+		{
+			return "forward";
+		}
+		else if(input.contains("back"))
+		{
+			return "back";
+		}
+		return input;
 	}
 }

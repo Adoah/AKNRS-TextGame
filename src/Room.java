@@ -275,6 +275,14 @@ public class Room
 	{
 		Crate.add(crate);
 	}
+	public void setVisibility(boolean vis)
+	{
+		this.isVisible = vis;
+	}
+	public boolean getVisibility()
+	{
+		return this.isVisible;
+	}
 	
 	public String toString()
 	{
