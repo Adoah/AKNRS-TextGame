@@ -104,13 +104,28 @@ public class Gameplay
 					{
 						//changes floor
 						player.changeFloor(delta);
+						//switching current room to the room with the staircase on the new floor.
+						int amtOfRooms = map.getAboveGroundAtPos(player.getPosition()).getBuilding(player.getCurrentBuilding()).getFloor(player.getCurrentFloor()).getRooms().size();
+						for(int i = 0; i < amtOfRooms; i++)
+						{
+							if(map.getAboveGroundAtPos(player.getPosition()).getBuilding(player.getCurrentBuilding()).getFloor(player.getCurrentFloor()).getRoom(i).getHasStaircase())
+							{
+								player.setCurrentRoom(i);
+							}
+						}
 					}
 				}
 			}
 		}
-		//TODO have to build for switching buildings
-		//TODO have to build for leaving buildings (setting currentRoom, currentFloor and currentBuilding to -1)
+		//leaving buildings entirely
+		if(parsed.equals("leave"))
+		{
+			player.setCurrentRoom(-1);
+			player.setCurrentFloor(-1);
+			player.setCurrentBuilding(-1);
+		}
 		
+		//TODO have to build for switching buildings		
 		//if floor++ or floor--, then say something like, you climb up the stairs
 		//same thing when changing rooms, say something like, "you enter a room with" ....
 		
