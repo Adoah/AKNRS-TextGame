@@ -21,10 +21,12 @@ public class Room
 	private int roomNumber;
 	//rooms that you can go to from this room
 	private int[] availableRooms;
+	//this is the 'roomNumber' of the room to the right/left/front/back
 	private int roomRight;
 	private int roomLeft;
 	private int roomFront;
 	private int roomBack;
+	private boolean hasStaircase;
 	
 	public Room()
 	{
@@ -34,6 +36,7 @@ public class Room
 		this.roomLeft = -1;
 		this.roomFront = -1;
 		this.roomBack = -1;
+		this.hasStaircase = false;
 	}
 	
 	//adding of weapons and animals have to be done manually, because of amount of children.
@@ -104,6 +107,14 @@ public class Room
 	public void setRoomBack(int roomBack) 
 	{
 		this.roomBack = roomBack;
+	}
+	public void setHasStaircase(boolean val)
+	{
+		this.hasStaircase = val;
+	}
+	public boolean getHasStaircase()
+	{
+		return this.hasStaircase;
 	}
 	
 	//leave direction input strings lowercase

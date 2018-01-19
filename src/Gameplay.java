@@ -65,17 +65,51 @@ public class Gameplay
 		String input = in.nextLine().toLowerCase();
 		String parsed = parseInput(input);
 		//moving between rooms in buildings
+		//TODO Also have to check if player is inside building
 		if(parsed.equals("left") || parsed.equals("right") || parsed.equals("forward") || parsed.equals("back")) 
 		{
-			int target = map.getAboveGroundAtPos(player.getPosition()).getBuilding(player.getCurrentBuilding()).getFloor(player.getCurrentFloor()).getRoom(player.getCurrentRoom()).getRoomInDirection(input);
-			if(target != -1)
+			if(player.getCurrentBuilding() != -1)
 			{
-				player.setCurrentRoom(target);
+				//checking if room exists
+				int target = map.getAboveGroundAtPos(player.getPosition()).getBuilding(player.getCurrentBuilding()).getFloor(player.getCurrentFloor()).getRoom(player.getCurrentRoom()).getRoomInDirection(input);
+				if(target != -1)
+				{
+					player.setCurrentRoom(target);
+				}
+				map.getAboveGroundAtPos(player.getPosition()).getBuilding(player.getCurrentBuilding()).getFloor(player.getCurrentFloor()).getRoom(player.getCurrentRoom()).toString();
 			}
-			map.getAboveGroundAtPos(player.getPosition()).getBuilding(player.getCurrentBuilding()).getFloor(player.getCurrentFloor()).getRoom(player.getCurrentRoom()).toString();
 		}
-		//TODO have to build for switching floors
+		//switching floors
+		if(parsed.equals("upstairs") || parsed.equals("downstairs"))
+		{
+			int delta = 0;
+			if(parsed.equals("upstairs"))
+			{
+				delta = 1;
+			}
+			if(parsed.equals("downstairs"))
+			{
+				delta = -1;
+			}
+			if(player.getCurrentBuilding() != -1)
+			{
+				//checking if floor exists
+				int totalFloorsOfBuilding = map.getAboveGroundAtPos(player.getPosition()).getBuilding(player.getCurrentBuilding()).getNumberOfFloors();
+				//checking if there is a floor above
+				if(totalFloorsOfBuilding - player.getCurrentFloor() > 0 && player.getCurrentFloor() > 0)
+				{
+					//have to check if player is in the room with the staircase
+					boolean staircase = map.getAboveGroundAtPos(player.getPosition()).getBuilding(player.getCurrentBuilding()).getFloor(player.getCurrentFloor()).getRoom(player.getCurrentRoom()).getHasStaircase();
+					if(staircase)
+					{
+						//changes floor
+						player.changeFloor(delta);
+					}
+				}
+			}
+		}
 		//TODO have to build for switching buildings
+		//TODO have to build for leaving buildings (setting currentRoom, currentFloor and currentBuilding to -1)
 		
 		//if floor++ or floor--, then say something like, you climb up the stairs
 		//same thing when changing rooms, say something like, "you enter a room with" ....

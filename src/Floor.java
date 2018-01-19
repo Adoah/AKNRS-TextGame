@@ -18,6 +18,10 @@ public class Floor
 	{
 		this.floorNumber = floorNumber;
 	}
+	public void changeFloor(int delta)
+	{
+		this.floorNumber = this.floorNumber + delta;
+	}
 	
 	public Floor(int rooms)
 	{

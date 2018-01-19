@@ -22,6 +22,9 @@ public class Player
 		this.Position[0] = 0;
 		this.Position[1] = 0;
 		this.maxweight = 70;
+		this.currentBuilding = -1;
+		this.currentFloor = -1;
+		this.currentRoom = -1;
 	}
 	
 	public int getCurrentRoom() 
@@ -47,6 +50,10 @@ public class Player
 	public void setCurrentBuilding(int currentBuilding) 
 	{
 		this.currentBuilding = currentBuilding;
+	}
+	public void changeFloor(int delta)
+	{
+		this.currentFloor = this.currentFloor + delta;
 	}
 
 	public ArrayList<Weapon> getWeapons() 

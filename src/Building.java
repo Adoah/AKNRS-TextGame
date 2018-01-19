@@ -24,6 +24,10 @@ public class Building
 	{
 		return Floors.get(index);
 	}
+	public int getNumberOfFloors()
+	{
+		return Floors.size();
+	}
 
 	public void setFloors(ArrayList<Floor> floors) 
 	{
