@@ -4,23 +4,18 @@
 
 import java.util.Random;
 
-public class Crate{
-
-	// needs an arraylist ArrayList<>
-  Random rand = new Random();
-  
-  //make an array of x values, fill it with the random number gen.
-  
-  public void buildCrate(){
-  
-  int a[] = new int[5]; 
-  //declaration and instantiation.
-  for(int i = 0; i < 5; i++)
-  {
-    a[i] = rand.nextInt();
-  }
-  
-  }
-  
-
+public class Crate
+{
+	//TODO generate array of all crate-droppable items
+	//builds an array of random ints
+	Random rand = new Random();
+	public void buildCrate() 
+	{
+		int a[] = new int[5];
+		for(int i = 0; i < 5; i++) 
+		{
+			a[i] = rand.nextInt();
+		}
+	}
+	//TODO have this array of ints reference the crate-droppable item array, and match files up.
 }

@@ -11,6 +11,8 @@ public class Player
 	private double maxweight;
 	//monitors position (x,y), references 2 dimensional array map
 	private int Position[] = new int[2];
+	//tracks inter-building position. [0] = floor, [1] = room number
+	private int Building[] = new int[2];
 	public Player()
 	{
 		this.Position[0] = 0;

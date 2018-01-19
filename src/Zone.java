@@ -36,4 +36,9 @@ public class Zone
 		return this.buildings.get(index);
 	}
 
+	public String toString()
+	{
+		return this.description;
+	}
+	
 }

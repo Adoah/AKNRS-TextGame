@@ -14,7 +14,8 @@ public class Room
 	private ArrayList<Weapon> Weapons = new ArrayList<>();
 	private ArrayList<Armor> Armor = new ArrayList<>();
 	private ArrayList<Crate> Crate = new ArrayList<>();
-	
+	private String description;
+	private int roomNumber;
 	
 	public Room()
 	{
@@ -33,6 +34,15 @@ public class Room
 		{
 			Utilities.add(new Utility());
 		}
+	}
+	
+	public String getDescription()
+	{
+		return this.description;
+	}
+	public void setDescription(String input)
+	{
+		this.description = input;
 	}
 	
 	public ArrayList<Consumable> getConsumables() 

@@ -3,6 +3,7 @@ import java.util.ArrayList;
 public class Floor 
 {
 	private static ArrayList<Room> Rooms = new ArrayList<>();
+	private int floorNumber;
 	//zero arg gives 1 room
 	public Floor()
 	{
