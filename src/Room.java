@@ -14,13 +14,26 @@ public class Room
 	private ArrayList<Weapon> Weapons = new ArrayList<>();
 	private ArrayList<Armor> Armor = new ArrayList<>();
 	private ArrayList<Crate> Crate = new ArrayList<>();
+	//used for dark or light rooms (as in, needs to use flashlight)
+	private boolean isVisible;
 	private String description;
+	//the 'number' of this room
 	private int roomNumber;
+	//rooms that you can go to from this room
+	private int[] availableRooms;
+	private int roomRight;
+	private int roomLeft;
+	private int roomFront;
+	private int roomBack;
 	
 	public Room()
 	{
-		//zero arg constructor with zero construction???
-		//is this legal
+		this.isVisible = true;
+		//-1 indicates no room there. 0 is first room upon entry to building.
+		this.roomRight = -1;
+		this.roomLeft = -1;
+		this.roomFront = -1;
+		this.roomBack = -1;
 	}
 	
 	//adding of weapons and animals have to be done manually, because of amount of children.
@@ -44,7 +57,78 @@ public class Room
 	{
 		this.description = input;
 	}
+	public int[] getAvailableRooms() 
+	{
+		return availableRooms;
+	}
+	public void setAvailableRooms(int[] availableRooms) 
+	{
+		this.availableRooms = availableRooms;
+	}
+	public int getRoomNumber() 
+	{
+		return roomNumber;
+	}
+	public void setRoomNumber(int roomNumber) 
+	{
+		this.roomNumber = roomNumber;
+	}
+	public int getRoomRight() 
+	{
+		return roomRight;
+	}
+	public void setRoomRight(int roomRight) 
+	{
+		this.roomRight = roomRight;
+	}
+	public int getRoomLeft() 
+	{
+		return roomLeft;
+	}
+	public void setRoomLeft(int roomLeft) 
+	{
+		this.roomLeft = roomLeft;
+	}
+	public int getRoomFront() 
+	{
+		return roomFront;
+	}
+	public void setRoomFront(int roomFront) 
+	{
+		this.roomFront = roomFront;
+	}
+	public int getRoomBack() 
+	{
+		return roomBack;
+	}
+	public void setRoomBack(int roomBack) 
+	{
+		this.roomBack = roomBack;
+	}
 	
+	//leave direction input strings lowercase
+	public int getRoomInDirection(String direction)
+	{
+		if(direction.equals("left"))
+		{
+			return this.roomLeft;
+		}
+		if(direction.equals("right"))
+		{
+			return this.roomRight;
+		}
+		if(direction.equals("forward"))
+		{
+			return this.roomFront;
+		}
+		if(direction.equals("back"))
+		{
+			return this.roomBack;
+		}
+		else return -1;
+	}
+	
+
 	public ArrayList<Consumable> getConsumables() 
 	{
 		return Consumables;
@@ -196,4 +280,5 @@ public class Room
 	{
 		return "consumables: " + Consumables.toString() + ", Utilities: " + Utilities.toString() + ", Animals: " + Animals.toString() + ", Weapons: " + Weapons.toString();
 	}
+
 }

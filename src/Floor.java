@@ -9,6 +9,16 @@ public class Floor
 	{
 		Rooms.add(new Room());
 	}
+	
+	public int getFloorNumber() 
+	{
+		return floorNumber;
+	}
+	public void setFloorNumber(int floorNumber) 
+	{
+		this.floorNumber = floorNumber;
+	}
+	
 	public Floor(int rooms)
 	{
 		for (int i = 0; i < rooms; i++)

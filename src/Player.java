@@ -8,17 +8,47 @@ public class Player
 	private double hp;
 	private double agility;
 	private double weight;
+	//maximum carry weight/inventory capacity is denoted by this. Calculations will need to be added so that it works tho
 	private double maxweight;
 	//monitors position (x,y), references 2 dimensional array map
 	private int Position[] = new int[2];
 	//tracks inter-building position. [0] = floor, [1] = room number
-	private int Building[] = new int[2];
+	private int currentBuilding;
+	private int currentFloor;
+	private int currentRoom;
+	
 	public Player()
 	{
 		this.Position[0] = 0;
-		this.Position[1] = 1;
+		this.Position[1] = 0;
 		this.maxweight = 70;
 	}
+	
+	public int getCurrentRoom() 
+	{
+		return currentRoom;
+	}
+	public void setCurrentRoom(int currentRoom) 
+	{
+		this.currentRoom = currentRoom;
+	}
+	public int getCurrentFloor() 
+	{
+		return currentFloor;
+	}
+	public void setCurrentFloor(int currentFloor) 
+	{
+		this.currentFloor = currentFloor;
+	}
+	public int getCurrentBuilding() 
+	{
+		return currentBuilding;
+	}
+	public void setCurrentBuilding(int currentBuilding) 
+	{
+		this.currentBuilding = currentBuilding;
+	}
+
 	public ArrayList<Weapon> getWeapons() 
 	{
 		return weapons;

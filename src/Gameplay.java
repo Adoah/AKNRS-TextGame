@@ -51,6 +51,9 @@ public class Gameplay
 		map.getAboveGroundAtPos(0, 0).getBuilding(0).getFloor(0).getRoom(0).setDescription("THE ROOM LOOKS LIKE THIS XSJLKJLDF");
 		map.getAboveGroundAtPos(0, 0).setDescription("THERE IS A BUILDING IN FRONT OF YOU... or YOU ENTER A BARREN TUNDRA");
 		
+		
+		//can I build a logical function that assigns the floor's array index to the data stored in the floor???
+		//scan through each position, if there is a building, then scan through each floor, setting floor.setFloorNumber to 'i'
 	}
 	public void turn()
 	{
@@ -58,28 +61,23 @@ public class Gameplay
 		Scanner in = new Scanner(System.in);
 		//TODO fighting system logic goes here!
 		//prints the description of the zone that the player has entered.
-		map.getAboveGroundAtPos(player.getPosition(0), player.getPosition(1)).toString();
-		//have to pull information from the room
-		
-		//get user input and do things from that
+		map.getAboveGroundAtPos(player.getPosition()).toString();
+
+		//parse the input, so that if it is left, right, forward, or back, then it reduces the string to just that.
 		String input = in.nextLine().toLowerCase();
-		if(input.contains("left"))
+		//moving between rooms in buildings
+		if(input.equals("left") || input.equals("right") || input.equals("forward") || input.equals("back")) 
 		{
-			player.positionLeft();
+			int target = map.getAboveGroundAtPos(player.getPosition()).getBuilding(player.getCurrentBuilding()).getFloor(player.getCurrentFloor()).getRoom(player.getCurrentRoom()).getRoomInDirection(input);
+			if(target != -1)
+			{
+				player.setCurrentRoom(target);
+			}
+			map.getAboveGroundAtPos(player.getPosition()).getBuilding(player.getCurrentBuilding()).getFloor(player.getCurrentFloor()).getRoom(player.getCurrentRoom()).toString();
 		}
-		if(input.contains("right"))
-		{
-			player.positionRight();
-		}
-		if(input.contains("forward"))
-		{
-			player.positionUp();
-		}
-		if(input.contains("backward"))
-		{
-			player.positionDown();
-		}
+		
 		//if floor++ or floor--, then say something like, you climb up the stairs
+		//same thing when changing rooms, say something like, "you enter a room with" ....
 		
 	}
 }
