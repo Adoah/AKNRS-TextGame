@@ -66,11 +66,11 @@ public class Gameplay
 		String parsed = parseInput(input);
 		//moving between rooms in buildings
 		//TODO Also have to check if player is inside building
-		if(parsed.equals("left") || parsed.equals("right") || parsed.equals("forward") || parsed.equals("back")) 
+		
+		if(player.getCurrentBuilding() != -1)
 		{
-			if(player.getCurrentBuilding() != -1)
+			if(parsed.equals("left") || parsed.equals("right") || parsed.equals("forward") || parsed.equals("back")) 
 			{
-				//checking if room exists
 				int target = map.getAboveGroundAtPos(player.getPosition()).getBuilding(player.getCurrentBuilding()).getFloor(player.getCurrentFloor()).getRoom(player.getCurrentRoom()).getRoomInDirection(input);
 				if(target != -1)
 				{
@@ -78,54 +78,91 @@ public class Gameplay
 				}
 				map.getAboveGroundAtPos(player.getPosition()).getBuilding(player.getCurrentBuilding()).getFloor(player.getCurrentFloor()).getRoom(player.getCurrentRoom()).toString();
 			}
-		}
-		//switching floors
-		if(parsed.equals("upstairs") || parsed.equals("downstairs"))
-		{
-			int delta = 0;
-			if(parsed.equals("upstairs"))
+			//switching floors
+			if(parsed.equals("upstairs") || parsed.equals("downstairs"))
 			{
-				delta = 1;
-			}
-			if(parsed.equals("downstairs"))
-			{
-				delta = -1;
-			}
-			if(player.getCurrentBuilding() != -1)
-			{
-				//checking if floor exists
-				int totalFloorsOfBuilding = map.getAboveGroundAtPos(player.getPosition()).getBuilding(player.getCurrentBuilding()).getNumberOfFloors();
-				//checking if there is a floor above
-				if(totalFloorsOfBuilding - player.getCurrentFloor() > 0 && player.getCurrentFloor() > 0)
+				int delta = 0;
+				if(parsed.equals("upstairs"))
 				{
-					//have to check if player is in the room with the staircase
-					boolean staircase = map.getAboveGroundAtPos(player.getPosition()).getBuilding(player.getCurrentBuilding()).getFloor(player.getCurrentFloor()).getRoom(player.getCurrentRoom()).getHasStaircase();
-					if(staircase)
+					delta = 1;
+				}
+				if(parsed.equals("downstairs"))
+				{
+					delta = -1;
+				}
+				if(player.getCurrentBuilding() != -1)
+				{
+					//checking if floor exists
+					int totalFloorsOfBuilding = map.getAboveGroundAtPos(player.getPosition()).getBuilding(player.getCurrentBuilding()).getNumberOfFloors();
+					//checking if there is a floor above
+					if(totalFloorsOfBuilding - player.getCurrentFloor() > 0 && player.getCurrentFloor() > 0)
 					{
-						//changes floor
-						player.changeFloor(delta);
-						//switching current room to the room with the staircase on the new floor.
-						int amtOfRooms = map.getAboveGroundAtPos(player.getPosition()).getBuilding(player.getCurrentBuilding()).getFloor(player.getCurrentFloor()).getRooms().size();
-						for(int i = 0; i < amtOfRooms; i++)
+						//have to check if player is in the room with the staircase
+						boolean staircase = map.getAboveGroundAtPos(player.getPosition()).getBuilding(player.getCurrentBuilding()).getFloor(player.getCurrentFloor()).getRoom(player.getCurrentRoom()).getHasStaircase();
+						if(staircase)
 						{
-							if(map.getAboveGroundAtPos(player.getPosition()).getBuilding(player.getCurrentBuilding()).getFloor(player.getCurrentFloor()).getRoom(i).getHasStaircase())
+							//changes floor
+							player.changeFloor(delta);
+							//switching current room to the room with the staircase on the new floor.
+							int amtOfRooms = map.getAboveGroundAtPos(player.getPosition()).getBuilding(player.getCurrentBuilding()).getFloor(player.getCurrentFloor()).getRooms().size();
+							for(int i = 0; i < amtOfRooms; i++)
 							{
-								player.setCurrentRoom(i);
+								if(map.getAboveGroundAtPos(player.getPosition()).getBuilding(player.getCurrentBuilding()).getFloor(player.getCurrentFloor()).getRoom(i).getHasStaircase())
+								{
+									player.setCurrentRoom(i);
+								}
 							}
 						}
+						else
+						{
+							System.out.println("There is no staircase to go up in this room!");
+						}
+					}
+					else
+					{
+						System.out.println("There is no floor there!");
 					}
 				}
+				else
+				{
+					System.out.println("You are not in a building!");
+				}
 			}
-		}
+			//TODO change this text
+			if(parsed.equals("other building"))
+			{
+				int totalBuildings = map.getAboveGroundAtPos(player.getPosition()).getBuildings().size();
+				if(totalBuildings > 1)
+				{
+					//prompt what building you want to switch into, and indicate which building you are in.
+					System.out.println("What building do you want to enter?");
+					for(int i = 1; i < totalBuildings + 1; i++)
+					{
+						if(i == player.getCurrentBuilding() + 1)
+						{
+							System.out.println("Building " + i + "(You are here)");
+						}
+						else
+						{
+							System.out.println("Building " + i);
+						}
+					}
+					//accept user input
+					int questionAnswer = in.nextInt();
+					//switch to building, and reset all values
+					player.setCurrentBuilding(questionAnswer);
+					player.setCurrentFloor(0);
+					player.setCurrentRoom(0);
+				}
+			}
+		}		
 		//leaving buildings entirely
 		if(parsed.equals("leave"))
 		{
 			player.setCurrentRoom(-1);
 			player.setCurrentFloor(-1);
 			player.setCurrentBuilding(-1);
-		}
-		
-		//TODO have to build for switching buildings		
+		}	
 		//if floor++ or floor--, then say something like, you climb up the stairs
 		//same thing when changing rooms, say something like, "you enter a room with" ....
 		
