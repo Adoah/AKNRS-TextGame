@@ -10,8 +10,9 @@ public class Player
 	private double weight;
 	//maximum carry weight/inventory capacity is denoted by this. Calculations will need to be added so that it works tho
 	private double maxweight;
-	//monitors position (x,y), references 2 dimensional array map
-	private int Position[] = new int[2];
+	//monitors position (x,y,z), references 3 dimensional array map
+	//z = 0 is above ground, -1 is below ground
+	private int Position[] = new int[3];
 	//tracks inter-building position. [0] = floor, [1] = room number
 	private int currentBuilding;
 	private int currentFloor;
@@ -21,6 +22,7 @@ public class Player
 	{
 		this.Position[0] = 0;
 		this.Position[1] = 0;
+		this.Position[2] = 0;
 		this.maxweight = 70;
 		this.currentBuilding = -1;
 		this.currentFloor = -1;
@@ -130,6 +132,10 @@ public class Player
 	public void setPositionY(int position)
 	{
 		this.Position[1] = position;
+	}
+	public void setPositionZ(int position)
+	{
+		this.Position[2] = position;
 	}
 	public void positionLeft()
 	{

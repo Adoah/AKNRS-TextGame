@@ -118,6 +118,7 @@ public class Room
 	}
 	
 	//leave direction input strings lowercase
+	//returns the room number of the room if there is a room in the direction selected. If there is no room available, it returns -1
 	public int getRoomInDirection(String direction)
 	{
 		if(direction.equals("left"))

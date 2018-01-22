@@ -1,48 +1,34 @@
 //map contains the object positions
 public class Map 
 {
-	private Zone aboveGround[][] = new Zone[25][25];
-	private Zone belowGround[][] = new Zone[25][25];
+	private Zone map[][][] = new Zone[25][25][2];
 	public Map()
 	{
 		for(int i = 0; i < 25; i++)
 		{
 			for(int j = 0; j < 25; j++)
 			{
-				aboveGround[i][j] = new Zone();
+				for(int k = 0; k < 2; k++)
+				{
+					map[i][j][k] = new Zone();
+				}
 			}
 		}
 	}
-	public Zone[][] getAboveGround() 
+	public Zone[][][] getMap() 
 	{
-		return aboveGround;
+		return map;
 	}
-	public void setAboveGround(Zone aboveGround[][]) 
+	public void setMap(Zone map[][][]) 
 	{
-		this.aboveGround = aboveGround;
+		this.map = map;
 	}
-	public Zone[][] getBelowGround() 
+	public Zone getMapAtPos(int position[])
 	{
-		return belowGround;
+		return map[position[0]][position[1]][position[2]];
 	}
-	public void setBelowGround(Zone belowGround[][]) 
+	public Zone getMapAtPos(int x, int y, int z)
 	{
-		this.belowGround = belowGround;
-	}
-	public Zone getAboveGroundAtPos(int position[])
-	{
-		return aboveGround[position[0]][position[1]];
-	}
-	public Zone getBelowGroundAtPos(int position[])
-	{
-		return belowGround[position[0]][position[1]];
-	}
-	public Zone getAboveGroundAtPos(int x, int y)
-	{
-		return aboveGround[x][y];
-	}
-	public Zone getBelowGroundAtPos(int x, int y)
-	{
-		return belowGround[x][y];
+		return map[x][y][z];
 	}
 }

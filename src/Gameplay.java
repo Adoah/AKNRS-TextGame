@@ -37,18 +37,18 @@ public class Gameplay
 		
 		//this is actually useful
 		//adding buildings
-		map.getAboveGroundAtPos(0, 0).addBuildings(2);
+		map.getMapAtPos(0, 0, 0).addBuildings(2);
 		//adding rooms (floors are added by default)
-		map.getAboveGroundAtPos(0, 0).getBuilding(0).getFloor(0).addRooms(2);
-		map.getAboveGroundAtPos(0, 0).getBuilding(0).getFloor(1).addRooms(2);
+		map.getMapAtPos(0, 0, 0).getBuilding(0).getFloor(0).addRooms(2);
+		map.getMapAtPos(0, 0, 0).getBuilding(0).getFloor(1).addRooms(2);
 		//adding a weapon
-		map.getAboveGroundAtPos(0, 0).getBuilding(0).getFloor(1).getRoom(0).addWeapon(new Rifle());
+		map.getMapAtPos(0, 0, 0).getBuilding(0).getFloor(1).getRoom(0).addWeapon(new Rifle());
 		//adding people
-		map.getAboveGroundAtPos(0, 0).getBuilding(0).getFloor(1).getRoom(1).addAnimal(new Human("Bozo", "clown"));
-		map.getAboveGroundAtPos(0, 0).getBuilding(0).getFloor(0).getRoom(0).addAnimal(new Human("JOIJIO", "lkadsf"));
+		map.getMapAtPos(0, 0, 0).getBuilding(0).getFloor(1).getRoom(1).addAnimal(new Human("Bozo", "clown"));
+		map.getMapAtPos(0, 0, 0).getBuilding(0).getFloor(0).getRoom(0).addAnimal(new Human("JOIJIO", "lkadsf"));
 		//testing description framework
-		map.getAboveGroundAtPos(0, 0).getBuilding(0).getFloor(0).getRoom(0).setDescription("THE ROOM LOOKS LIKE THIS XSJLKJLDF");
-		map.getAboveGroundAtPos(0, 0).setDescription("THERE IS A BUILDING IN FRONT OF YOU... or YOU ENTER A BARREN TUNDRA");
+		map.getMapAtPos(0, 0, 0).getBuilding(0).getFloor(0).getRoom(0).setDescription("THE ROOM LOOKS LIKE THIS XSJLKJLDF");
+		map.getMapAtPos(0, 0, 0).setDescription("THERE IS A BUILDING IN FRONT OF YOU... or YOU ENTER A BARREN TUNDRA");
 		
 		
 		//can I build a logical function that assigns the floor's array index to the data stored in the floor???
@@ -58,25 +58,37 @@ public class Gameplay
 	{
 		
 		Scanner in = new Scanner(System.in);
-		//TODO fighting system logic goes here!
 		//prints the description of the zone that the player has entered.
-		map.getAboveGroundAtPos(player.getPosition()).toString();
-
+		//map.getMapAtPos(player.getPosition()).toString();
+		//makes the input lowercase
 		String input = in.nextLine().toLowerCase();
+		//runs the parseinput function.
 		String parsed = parseInput(input);
-		//moving between rooms in buildings
-		//TODO Also have to check if player is inside building
+		//TODO fighting system logic goes here!
+		if(parsed.contains("attack"))
+		{
+			//pull the enemies in the current room from the map
+			map.getMapAtPos(player.getPosition());
+			//figure out which animal is hostile
+			//ask player who they want to attack
+			//if(parsed.contains(animal name)) then forgoe questioning the player
+			//follow same process for figuring out what weapon to use.
+		}
 		
 		if(player.getCurrentBuilding() != -1)
 		{
+			//moving rooms between buildings
 			if(parsed.equals("left") || parsed.equals("right") || parsed.equals("forward") || parsed.equals("back")) 
 			{
-				int target = map.getAboveGroundAtPos(player.getPosition()).getBuilding(player.getCurrentBuilding()).getFloor(player.getCurrentFloor()).getRoom(player.getCurrentRoom()).getRoomInDirection(input);
+				//parsing for directions occurs in this function
+				int target = map.getMapAtPos(player.getPosition()).getBuilding(player.getCurrentBuilding()).getFloor(player.getCurrentFloor()).getRoom(player.getCurrentRoom()).getRoomInDirection(input);
 				if(target != -1)
 				{
 					player.setCurrentRoom(target);
+					//prints description of the room that you just switched to.
+					System.out.println(map.getMapAtPos(player.getPosition()).getBuilding(player.getCurrentBuilding()).getFloor(player.getCurrentFloor()).getRoom(player.getCurrentRoom()).toString());
 				}
-				map.getAboveGroundAtPos(player.getPosition()).getBuilding(player.getCurrentBuilding()).getFloor(player.getCurrentFloor()).getRoom(player.getCurrentRoom()).toString();
+				System.out.println("There is no room that way!");
 			}
 			//switching floors
 			if(parsed.equals("upstairs") || parsed.equals("downstairs"))
@@ -93,25 +105,27 @@ public class Gameplay
 				if(player.getCurrentBuilding() != -1)
 				{
 					//checking if floor exists
-					int totalFloorsOfBuilding = map.getAboveGroundAtPos(player.getPosition()).getBuilding(player.getCurrentBuilding()).getNumberOfFloors();
+					int totalFloorsOfBuilding = map.getMapAtPos(player.getPosition()).getBuilding(player.getCurrentBuilding()).getNumberOfFloors();
 					//checking if there is a floor above
 					if(totalFloorsOfBuilding - player.getCurrentFloor() > 0 && player.getCurrentFloor() > 0)
 					{
 						//have to check if player is in the room with the staircase
-						boolean staircase = map.getAboveGroundAtPos(player.getPosition()).getBuilding(player.getCurrentBuilding()).getFloor(player.getCurrentFloor()).getRoom(player.getCurrentRoom()).getHasStaircase();
+						boolean staircase = map.getMapAtPos(player.getPosition()).getBuilding(player.getCurrentBuilding()).getFloor(player.getCurrentFloor()).getRoom(player.getCurrentRoom()).getHasStaircase();
 						if(staircase)
 						{
 							//changes floor
 							player.changeFloor(delta);
 							//switching current room to the room with the staircase on the new floor.
-							int amtOfRooms = map.getAboveGroundAtPos(player.getPosition()).getBuilding(player.getCurrentBuilding()).getFloor(player.getCurrentFloor()).getRooms().size();
+							int amtOfRooms = map.getMapAtPos(player.getPosition()).getBuilding(player.getCurrentBuilding()).getFloor(player.getCurrentFloor()).getRooms().size();
 							for(int i = 0; i < amtOfRooms; i++)
 							{
-								if(map.getAboveGroundAtPos(player.getPosition()).getBuilding(player.getCurrentBuilding()).getFloor(player.getCurrentFloor()).getRoom(i).getHasStaircase())
+								if(map.getMapAtPos(player.getPosition()).getBuilding(player.getCurrentBuilding()).getFloor(player.getCurrentFloor()).getRoom(i).getHasStaircase())
 								{
 									player.setCurrentRoom(i);
 								}
 							}
+							//prints the description of the room that you have just entered.
+							System.out.println(map.getMapAtPos(player.getPosition()).getBuilding(player.getCurrentBuilding()).getFloor(player.getCurrentFloor()).getRoom(player.getCurrentRoom()).toString());
 						}
 						else
 						{
@@ -131,7 +145,7 @@ public class Gameplay
 			//TODO change this text
 			if(parsed.equals("other building"))
 			{
-				int totalBuildings = map.getAboveGroundAtPos(player.getPosition()).getBuildings().size();
+				int totalBuildings = map.getMapAtPos(player.getPosition()).getBuildings().size();
 				if(totalBuildings > 1)
 				{
 					//prompt what building you want to switch into, and indicate which building you are in.
