@@ -7,7 +7,9 @@ public class Animal
 	private int health;
 	private boolean isAlive;
 	private String temperament;
+	//number from 0-1. 0 is no hostility, 1 is immediate hostility
 	private double hostility;
+	private String description;
 	
 	public Animal()
 	{
@@ -26,6 +28,7 @@ public class Animal
 		this.temperament = temperament;
 	}
 	
+	//TODO random number generator based on the hostility index
 	public String getName() 
 	{
 		return name;
@@ -75,7 +78,8 @@ public class Animal
 	}
 	public String toString()
 	{
-		return "Name: " + this.name + ", Species: " + this.species + ", Attack Damage: " + this.atkDmg + ", Health: " + this.health + ", Temperament: " + this.temperament + ", Hostility: " + this.hostility;
+		//TODO figure out correct formatting here
+		return "A " + this.species + " " + this.description;
 	}
 	public String getTemperament() 
 	{
@@ -92,5 +96,24 @@ public class Animal
 	public void setHostility(double hostility) 
 	{
 		this.hostility = hostility;
+	}
+	public void checkIsAlive()
+	{
+		if(this.health > 0)
+		{
+			this.isAlive = true;
+		}
+		else
+		{
+			this.isAlive = false;
+		}
+	}
+
+	public String getDescription() {
+		return description;
+	}
+
+	public void setDescription(String description) {
+		this.description = description;
 	}
 }

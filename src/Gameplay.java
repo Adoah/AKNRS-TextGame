@@ -14,7 +14,7 @@ public class Gameplay
 		turn();
 	}
 	//full world generation.
-	//might make it progressive in the future.
+	//might make it progressive in the future. As in it's executing as the person walks into each zone?? For ram efficiency???
 	public void init()
 	{
 		ArrayList<Animal> animals = new ArrayList<>();
@@ -56,7 +56,6 @@ public class Gameplay
 	}
 	public void turn()
 	{
-		
 		Scanner in = new Scanner(System.in);
 		//prints the description of the zone that the player has entered.
 		//map.getMapAtPos(player.getPosition()).toString();
@@ -68,13 +67,45 @@ public class Gameplay
 		if(parsed.contains("attack"))
 		{
 			//pull the enemies in the current room from the map
-			map.getMapAtPos(player.getPosition());
+			 ArrayList<Animal> roomAnimals = (ArrayList<Animal>) map.getMapAtPos(player.getPosition()).getBuilding(player.getCurrentBuilding()).getFloor(player.getCurrentFloor()).getRoom(player.getCurrentRoom()).getAnimals().clone();
 			//figure out which animal is hostile
+			 ArrayList<Animal> hostileAnimals = new ArrayList<>();
+			 for(int i = 0; i < roomAnimals.size(); i++)
+			 {
+				 if(roomAnimals.get(i).getHostility() > .8)
+				 {
+					 hostileAnimals.add(roomAnimals.get(i));
+				 }
+			 }
+			 System.out.println("What do you want to attack?");
+			 for(int i = 0; i < hostileAnimals.size(); i++)
+			 {
+				 //TODO figure out correct formatting system here
+				 hostileAnimals.get(i).toString();
+			 }
+			 input = in.next().toLowerCase();
+			 int targetAnimalIndex = -1;
+			 //using j for error checking
+			 int j = 0;
+			 //TODO later check for the enemy in the original input text
+			 for(int i = 0; i < hostileAnimals.size(); i++)
+			 {
+				 if(hostileAnimals.get(i).getName().equals(input))
+				 {
+					 j++;
+					targetAnimalIndex = i;
+				 }
+			 }
+			 if(j > 1)
+			 {
+				System.out.println("there are more than one of those!");
+				//TODO ask which one of the many to execute;
+			 }
+			 attack(hostileAnimals.get(targetAnimalIndex));
 			//ask player who they want to attack
-			//if(parsed.contains(animal name)) then forgoe questioning the player
+			//if(parsed.contains(animal name)) then forge questioning the player
 			//follow same process for figuring out what weapon to use.
 		}
-		
 		if(player.getCurrentBuilding() != -1)
 		{
 			//moving rooms between buildings
@@ -202,5 +233,17 @@ public class Gameplay
 			return "back";
 		}
 		return input;
+	}
+	public void attack(Animal target)
+	{
+		//TODO check for weapon names in original input
+		System.out.println("what do you want to attack with");
+		for(int i = 0; i < player.getWeapons().size(); i++)
+		{
+			System.out.println(player.getWeapons().get(i).getName());
+		}
+		Scanner scanner = new Scanner(System.in);
+		String input = scanner.nextLine();
+		
 	}
 }
