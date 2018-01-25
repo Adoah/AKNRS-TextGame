@@ -50,13 +50,16 @@ public class Gameplay
 		map.getMapAtPos(0, 0, 0).getBuilding(0).getFloor(1).getRoom(1).addAnimal(new Human("Tom (Codename Bravo)", "UN soldier"));
 		map.getMapAtPos(0, 0, 0).getBuilding(0).getFloor(0).getRoom(0).addAnimal(new Human("Vlademir", "Militia Leader"));
 		map.getMapAtPos(0, 0, 0).getBuilding(0).getFloor(0).getRoom(0).addAnimal(new Human("Peter", "Militia fighter"));
+		map.getMapAtPos(0, 0, 0).getBuilding(0).getFloor(0).getRoom(0).addWeapon(new DMR());
+		map.getMapAtPos(0, 0, 0).getBuilding(0).getFloor(0).getRoom(0).addArmor(new Armor2());
+
 		//testing description framework
-		map.getMapAtPos(0, 0, 0).getBuilding(0).getFloor(0).getRoom(0).setDescription("You find yourself in a heavily fortified bunker on a island that overlooks the ocean and in the didstance there is a snowy forest at the edge of the beach");
-		map.getMapAtPos(0, 0, 0).setDescription("THERE IS A BUILDING IN FRONT OF YOU... or YOU ENTER A BARREN TUNDRA");
-		map.getMapAtPos(0, 1, 0).setDescription("THIS IS A TEST STATING THAT YOU ARE IN A BARREN TUNDRA");
-		map.getMapAtPos(0, 1, 0).addBuildings(1);
-		map.getMapAtPos(0, 1, 0).getBuilding(0).getFloor(0).getRoom(0).setDescription("There is a gun in this room.");
-		map.getMapAtPos(0, 1, 0).getBuilding(0).getFloor(0).getRoom(0).addWeapon(new DMR());
+		map.getMapAtPos(0, 0, 0).setDescription("You are on a fortified island that overlooks the ocean. In the didstance there is a snowy forest at the edge of a beach.");
+		map.getMapAtPos(0, 0, 0).getBuilding(0).getFloor(0).getRoom(0).setDescription("You are in a heavily fortified bunker with 2 inch thick steel plating a DMR and Level two Armor rests on a work bench. There are 5 people in the room with you deep in conversation. Bonzo: The UN Officer, Ric (Codename Alfa): A UN soldier, Tom (Codename Bravo): A UN soldier, Vlademir: The Milita Leader, and Peter: A Militia Fighter. Bonzo the UN oficer turns around slowly and adresses you: Welcome, thanks for coming, as you know this situation here is pretty bad");
+		//map.getMapAtPos(0, 1, 0).setDescription("THIS IS A TEST STATING THAT YOU ARE IN A BARREN TUNDRA");
+		//map.getMapAtPos(0, 1, 0).addBuildings(1);
+		//map.getMapAtPos(0, 1, 0).getBuilding(0).getFloor(0).getRoom(0).setDescription("There is a gun in this room.");
+		//map.getMapAtPos(0, 1, 0).getBuilding(0).getFloor(0).getRoom(0).addWeapon(new DMR());
 		
 		//can I build a logical function that assigns the floor's array index to the data stored in the floor???
 		//scan through each position, if there is a building, then scan through each floor, setting floor.setFloorNumber to 'i'
