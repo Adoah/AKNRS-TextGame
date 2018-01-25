@@ -52,10 +52,18 @@ public class Gameplay
 		map.getMapAtPos(0, 0, 0).getBuilding(0).getFloor(0).getRoom(0).addAnimal(new Human("Peter", "Militia fighter"));
 		map.getMapAtPos(0, 0, 0).getBuilding(0).getFloor(0).getRoom(0).addWeapon(new DMR());
 		map.getMapAtPos(0, 0, 0).getBuilding(0).getFloor(0).getRoom(0).addArmor(new Armor2());
-
+		Scanner in = new Scanner(System.in);
+		
 		//testing description framework
 		map.getMapAtPos(0, 0, 0).setDescription("You are on a fortified island that overlooks the ocean. In the didstance there is a snowy forest at the edge of a beach.");
 		map.getMapAtPos(0, 0, 0).getBuilding(0).getFloor(0).getRoom(0).setDescription("You are in a heavily fortified bunker with 2 inch thick steel plating a DMR and Level two Armor rests on a work bench. There are 5 people in the room with you deep in conversation. Bonzo: The UN Officer, Ric (Codename Alfa): A UN soldier, Tom (Codename Bravo): A UN soldier, Vlademir: The Milita Leader, and Peter: A Militia Fighter. Bonzo the UN oficer turns around slowly and adresses you: Welcome, thanks for coming, as you know this situation here is pretty bad");
+		String input = in.nextLine().toLowerCase();
+		String parsed = parseInput(input);
+		input = in.next().toLowerCase();
+		if (KEYPRESSED == true) {
+			map.getMapAtPos(0, 0, 0).getBuilding(0).getFloor(0).getRoom(0).setDescription("");
+		}
+		
 		//map.getMapAtPos(0, 1, 0).setDescription("THIS IS A TEST STATING THAT YOU ARE IN A BARREN TUNDRA");
 		//map.getMapAtPos(0, 1, 0).addBuildings(1);
 		//map.getMapAtPos(0, 1, 0).getBuilding(0).getFloor(0).getRoom(0).setDescription("There is a gun in this room.");
