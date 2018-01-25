@@ -17,6 +17,7 @@ public class Gameplay
 	//might make it progressive in the future. As in it's executing as the person walks into each zone?? For ram efficiency???
 	public void init()
 	{
+
 		ArrayList<Animal> animals = new ArrayList<>();
 		ArrayList<Weapon> weapons = new ArrayList<>();
 		
@@ -33,24 +34,33 @@ public class Gameplay
 		animals.add(new Human("Kayden"));
 		animals.get(0).setTemperament("barbarian");
 		animals.get(3).setTemperament("relaxed");
-		animals.get(4).setTemperament("lunatic");
+		animals.get(4).setTemperament("The most awesome");
 		
 		//this is actually useful
 		//adding buildings
-		map.getMapAtPos(0, 0, 0).addBuildings(2);
+		map.getMapAtPos(0, 0, 0).addBuildings(1);
 		//adding rooms (floors are added by default)
-		map.getMapAtPos(0, 0, 0).getBuilding(0).getFloor(0).addRooms(2);
-		map.getMapAtPos(0, 0, 0).getBuilding(0).getFloor(1).addRooms(2);
+		map.getMapAtPos(0, 0, 0).getBuilding(0).getFloor(0).addRooms(1);
+		
 		//adding a weapon
 		map.getMapAtPos(0, 0, 0).getBuilding(0).getFloor(1).getRoom(0).addWeapon(new Rifle());
 		//adding people
-		map.getMapAtPos(0, 0, 0).getBuilding(0).getFloor(1).getRoom(1).addAnimal(new Human("Bozo", "clown"));
-		map.getMapAtPos(0, 0, 0).getBuilding(0).getFloor(0).getRoom(0).addAnimal(new Human("JOIJIO", "lkadsf"));
+		map.getMapAtPos(0, 0, 0).getBuilding(0).getFloor(1).getRoom(1).addAnimal(new Human("Bonzo", "UN Oficer"));
+		map.getMapAtPos(0, 0, 0).getBuilding(0).getFloor(1).getRoom(1).addAnimal(new Human("Ric (Codename Alfa)", "UN soldier"));
+		map.getMapAtPos(0, 0, 0).getBuilding(0).getFloor(1).getRoom(1).addAnimal(new Human("Tom (Codename Bravo)", "UN soldier"));
+		map.getMapAtPos(0, 0, 0).getBuilding(0).getFloor(0).getRoom(0).addAnimal(new Human("Vlademir", "Militia Leader"));
+		map.getMapAtPos(0, 0, 0).getBuilding(0).getFloor(0).getRoom(0).addAnimal(new Human("Peter", "Militia fighter"));
 		//testing description framework
-		map.getMapAtPos(0, 0, 0).getBuilding(0).getFloor(0).getRoom(0).setDescription("THE ROOM LOOKS LIKE THIS XSJLKJLDF");
+		map.getMapAtPos(0, 0, 0).getBuilding(0).getFloor(0).getRoom(0).setDescription("You find yourself in a heavily fortified bunker on a island that overlooks the ocean and in the didstance there is a snowy forest at the edge of the beach");
 		map.getMapAtPos(0, 0, 0).setDescription("THERE IS A BUILDING IN FRONT OF YOU... or YOU ENTER A BARREN TUNDRA");
+		map.getMapAtPos(0, 1, 0).setDescription("THIS IS A TEST STATING THAT YOU ARE IN A BARREN TUNDRA");
+		map.getMapAtPos(0, 1, 0).addBuildings(1);
+		map.getMapAtPos(0, 1, 0).getBuilding(0).getFloor(0).getRoom(0).setDescription("There is a gun in this room.");
+		map.getMapAtPos(0, 1, 0).getBuilding(0).getFloor(0).getRoom(0).addWeapon(new DMR());
 		
-		
+		//can I build a logical function that assigns the floor's array index to the data stored in the floor???
+		//scan through each position, if there is a building, then scan through each floor, setting floor.setFloorNumber to 'i'
+	
 		//can I build a logical function that assigns the floor's array index to the data stored in the floor???
 		//scan through each position, if there is a building, then scan through each floor, setting floor.setFloorNumber to 'i'
 	}
