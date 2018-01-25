@@ -212,9 +212,9 @@ public class Gameplay
 		//same thing when changing rooms, say something like, "you enter a room with" ....
 		
 	}
-	
 	public String parseInput(String input)
 	{
+		//build a string tokenizer
 		//reduces the input string to left, right, front or back for simplicity and other code compatibility.
 		if(input.contains("left"))
 		{
@@ -236,6 +236,7 @@ public class Gameplay
 	}
 	public void attack(Animal target)
 	{
+		//this is where all the actual attacking happens
 		//TODO check for weapon names in original input
 		System.out.println("what do you want to attack with");
 		for(int i = 0; i < player.getWeapons().size(); i++)
