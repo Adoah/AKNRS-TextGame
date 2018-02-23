@@ -10,6 +10,7 @@ public class Armor {
 	  private int weight;
 	  private double wear;
 	  private boolean isUsable;
+	  private double wearPerHit;
 
 	  public Armor(){
 	    this.wear = 0;
@@ -68,5 +69,14 @@ public class Armor {
 	   return "You found: " + this.name + "It is a level " + this.armorClass + "balistic protection and is: " + this.size + "and weighs: " + this.weight + "Kg" + " its condition is: " + this.wear + this.isUsable;
 	    
 	  }
+
+	public double getWearPerHit() 
+	{
+		return wearPerHit;
+	}
+	public void setWearPerHit(double wearPerHit) 
+	{
+		this.wearPerHit = wearPerHit;
+	}
 	
 }

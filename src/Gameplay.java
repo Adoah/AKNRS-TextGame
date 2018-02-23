@@ -77,6 +77,7 @@ public class Gameplay
 		//can I build a logical function that assigns the floor's array index to the data stored in the floor???
 		//scan through each position, if there is a building, then scan through each floor, setting floor.setFloorNumber to 'i'
 	}
+	@SuppressWarnings("unchecked")
 	public void turn()
 	{
 		Scanner in = new Scanner(System.in);
@@ -89,7 +90,7 @@ public class Gameplay
 		//TODO fighting system logic goes here!
 		if(parsed.contains("attack"))
 		{
-			//pull the enemies in the current room from the map
+			//pull the enemies in the current room from the map into an isolated arraylist
 			 ArrayList<Animal> roomAnimals = (ArrayList<Animal>) map.getMapAtPos(player.getPosition()).getBuilding(player.getCurrentBuilding()).getFloor(player.getCurrentFloor()).getRoom(player.getCurrentRoom()).getAnimals().clone();
 			//figure out which animal is hostile
 			 ArrayList<Animal> hostileAnimals = new ArrayList<>();
@@ -101,21 +102,29 @@ public class Gameplay
 				 }
 			 }
 			 System.out.println("What do you want to attack?");
-			 for(int i = 0; i < hostileAnimals.size(); i++)
+			 //prints the list of animals that are in the room, and indicates which are hostile
+			 for(int i = 0; i < roomAnimals.size(); i++)
 			 {
 				 //TODO figure out correct formatting system here
-				 hostileAnimals.get(i).toString();
+				 String result = "";
+				 result = roomAnimals.get(i).toString() + " ";
+				 if(roomAnimals.get(i).getHostile())
+				 {
+					 result += "(HOSTILE)";
+				 }
+				 System.out.println(result);
 			 }
+			 //gets user input
 			 input = in.next().toLowerCase();
 			 int targetAnimalIndex = -1;
-			 //using j for error checking
+			 //j is for ensuring that there is only one of the animals
 			 int j = 0;
 			 //TODO later check for the enemy in the original input text
 			 for(int i = 0; i < hostileAnimals.size(); i++)
 			 {
 				 if(hostileAnimals.get(i).getName().equals(input))
 				 {
-					 j++;
+					j++;
 					targetAnimalIndex = i;
 				 }
 			 }
@@ -124,6 +133,7 @@ public class Gameplay
 				System.out.println("there are more than one of those!");
 				//TODO ask which one of the many to execute;
 			 }
+			 //TODO Add dead animal checking earlier (somewhere in here)
 			 attack(hostileAnimals.get(targetAnimalIndex));
 			//ask player who they want to attack
 			//if(parsed.contains(animal name)) then forge questioning the player
@@ -306,6 +316,7 @@ public class Gameplay
 		}
 		return input;
 	}
+	@SuppressWarnings({ "resource", "unused" })
 	public void attack(Animal target)
 	{
 		//this is where all the actual attacking happens
@@ -315,13 +326,42 @@ public class Gameplay
 		{
 			System.out.println(player.getWeapons().get(i).getName());
 		}
+		//weapon selection
 		Scanner scanner = new Scanner(System.in);
 		int weaponSelection = scanner.nextInt();
+		Weapon weapon = player.getWeapons().get(weaponSelection);
 		if(target.getAlive())
 		{
-			//the math goes here. accounting for armor and HS probability. Make sure to decrement ammo!
-			//also add in supplementary math, such as wearing down the weapon
-			//target.setHealth(target.getHealth() - player.getWeapons().get(weaponSelection).getAtkDmg());
+			if(player.getAmtOfType(weapon.getAmmoType()) > 0)
+			{
+				//PLAYER IS ATTACKING
+				//TODO integrate HS probability (more damage dealt if HS)
+				//TODO integrate effective range (if out of range, misses) (inapplicable)
+				//TODO integrate aim time (enemy might get in 2 attacks in the time it takes you to do one
+				//decrementing the target's health
+				target.setHealth(target.getHealth() - weapon.getAtkDmg());
+				//decrementing ammo
+				player.remove1RoundOfType(weapon.getAmmoType());
+				//changing the wear of the weapon
+				weapon.setWear(weapon.getWear() - weapon.getWearPerShot());
+				
+				//ENEMY IS ATTACKING
+				if(player.getArmor().getArmorClass() <= target.getMaximumPenetratableArmor())
+				{
+					//doing damage to the player
+					player.setHealth(player.getHealth() - target.getAtkDmg());
+					//doing damage to the player's armor
+					player.getArmor().setWear(player.getArmor().getWear() - player.getArmor().getWearPerHit());
+				}
+				else
+				{
+					System.out.println("Your armor is too powerful! The enemy cannot harm you (until your armor breaks)!");
+				}
+			}
+		}
+		else
+		{
+			System.out.println("The target that you have selected is dead! There is no point wasting ammo!");
 		}
 		
 	}

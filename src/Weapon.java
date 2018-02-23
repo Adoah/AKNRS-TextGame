@@ -2,16 +2,19 @@ public class Weapon
 {
 	//attributes
 	private int atkDmg;
-	private int wear;
+	private double wear;
 	private boolean isUsable;
 	private int effectiveRange;
 	private double weight;
 	private double rechargeTime;
-	private double wearMultiplier;
+	//
+	private double WearPerShot;
 	private double stealth;
 	private double armorPenetration;
-	private char maximumPenetratableArmor[] = new char[2];
+	private int maximumPenetratableArmor;
 	private double aimTime;
+	//type 0 = 50cal, type 1 = 762, type 2 = 556, type 3 = 12 gauge, type 4 = 9mm
+	private int ammoType;
 	private String name;
 	
 	//constructors
@@ -19,7 +22,7 @@ public class Weapon
 	{
 		this.isUsable = true;
 		this.wear = 0;
-		this.wearMultiplier = 1;
+		this.WearPerShot = 1;
 	}
 	
 	public Weapon(int atkDmg, int wear, boolean isUsable)
@@ -35,7 +38,7 @@ public class Weapon
 	{
 		return this.atkDmg;
 	}
-	public int getWear()
+	public double getWear()
 	{
 		return this.wear;
 	}
@@ -55,9 +58,9 @@ public class Weapon
 	{
 		return this.rechargeTime;
 	}
-	public double getWearMultiplier()
+	public double getWearPerShot()
 	{
-		return this.wearMultiplier;
+		return this.WearPerShot;
 	}
 	public double getStealth()
 	{
@@ -67,7 +70,7 @@ public class Weapon
 	{
 		return this.armorPenetration;
 	}
-	public char[] getMaximumPenetratableArmor()
+	public int getMaximumPenetratableArmor()
 	{
 		return this.maximumPenetratableArmor;
 	}
@@ -80,7 +83,7 @@ public class Weapon
 	{
 		this.atkDmg = atkDmg;
 	}
-	public void setWear(int wear)
+	public void setWear(double wear)
 	{
 		this.wear = wear;
 	}
@@ -100,9 +103,9 @@ public class Weapon
 	{
 		this.rechargeTime = rechargeTime;
 	}
-	public void setWearMultiplier(double wearMultiplier)
+	public void setWearPerShot(double WearPerShot)
 	{
-		this.wearMultiplier = wearMultiplier;
+		this.WearPerShot = WearPerShot;
 	}
 	public void setStealth(double stealth)
 	{
@@ -112,10 +115,9 @@ public class Weapon
 	{
 		this.armorPenetration = armorPenetration;
 	}
-	public void setMaximumPenetratableArmor(char number, char character)
+	public void setMaximumPenetratableArmor(int number)
 	{
-		this.maximumPenetratableArmor[0] = number;
-		this.maximumPenetratableArmor[1] = character;
+		this.maximumPenetratableArmor = number;
 	}
 	public void setAimTime(double aimTime)
 	{
@@ -136,5 +138,13 @@ public class Weapon
 	public void setName(String name) 
 	{
 		this.name = name;
+	}
+	public int getAmmoType() 
+	{
+		return ammoType;
+	}
+	public void setAmmoType(int ammoType) 
+	{
+		this.ammoType = ammoType;
 	}
 }

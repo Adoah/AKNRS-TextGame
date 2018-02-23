@@ -12,6 +12,7 @@ public class Animal
 	//number from 0-1. 0 is no hostility, 1 is immediate hostility
 	private double hostility;
 	private String description;
+	private int maximumPenetratableArmor;
 	
 	public Animal()
 	{
@@ -55,7 +56,7 @@ public class Animal
 	{
 		this.atkDmg = atkDmg;
 	}
-	public double getHealth() 
+	public int getHealth() 
 	{
 		return health;
 	}
@@ -113,11 +114,23 @@ public class Animal
 	{
 		this.hostility = hostility;
 	}
-	public String getDescription() {
+	public String getDescription() 
+	{
 		return description;
 	}
 
-	public void setDescription(String description) {
+	public void setDescription(String description) 
+	{
 		this.description = description;
+	}
+
+	public int getMaximumPenetratableArmor() 
+	{
+		return maximumPenetratableArmor;
+	}
+
+	public void setMaximumPenetratableArmor(int number)
+	{
+		this.maximumPenetratableArmor = number;
 	}
 }

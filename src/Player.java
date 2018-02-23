@@ -5,9 +5,12 @@ public class Player
 	private ArrayList<Weapon> weapons = new ArrayList<>();
 	private ArrayList<Consumable> consumables = new ArrayList<>();
 	private ArrayList<Utility> Utility = new ArrayList<>();
-	private double hp;
+	private int health;
 	private double agility;
 	private double weight;
+	//type 0 = 50cal, type 1 = 762, type 2 = 556, type 3 = 12 gauge, type 4 = 9mm
+	private int ammo[] = new int[5];
+	private Armor armor;
 	//maximum carry weight/inventory capacity is denoted by this. Calculations will need to be added so that it works tho
 	private double maxweight;
 	//monitors position (x,y,z), references 3 dimensional array map
@@ -93,17 +96,17 @@ public class Player
 	{
 		Utility = utility;
 	}
-	public void addHp(int hpToAdd)
+	public void addHealth(int healthToAdd)
 	{
-		this.hp = this.hp + hpToAdd;
+		this.health = this.health + healthToAdd;
 	}
-	public double getHp() 
+	public int getHealth() 
 	{
-		return hp;
+		return health;
 	}
-	public void setHp(double hp) 
+	public void setHealth(int health) 
 	{
-		this.hp = hp;
+		this.health = health;
 	}
 	public double getAgility() 
 	{
@@ -168,5 +171,29 @@ public class Player
 	public void positionDown()
 	{
 		this.Position[1]--;
+	}
+	public int[] getAmmo() 
+	{
+		return ammo;
+	}
+	public int getAmtOfType(int type)
+	{
+		return ammo[type];
+	}
+	public void setAmmo(int ammo[]) 
+	{
+		this.ammo = ammo;
+	}
+	public void remove1RoundOfType(int type)
+	{
+		this.ammo[type]--;
+	}
+	public Armor getArmor() 
+	{
+		return armor;
+	}
+	public void setArmor(Armor armor) 
+	{
+		this.armor = armor;
 	}
 }
