@@ -70,7 +70,7 @@ public class Player
 	{
 		this.weapons = weapons;
 	}
-	public void addConsumables(Consumable consumable)
+	public void addConsumable(Consumable consumable)
 	{
 		this.consumables.add(consumable);
 	}

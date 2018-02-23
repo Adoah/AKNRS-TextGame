@@ -164,6 +164,14 @@ public class Room
 	{
 		Consumables.add(consumable);
 	}
+	public void removeConsumable(int index)
+	{
+		Consumables.remove(index);
+	}
+	public void removeConsumable(Consumable consumable)
+	{
+		Consumables.remove(consumable);
+	}
 	
 	
 	public ArrayList<Weapon> getWeapons() 
@@ -188,6 +196,14 @@ public class Room
 	public void addWeapon(Weapon weapon)
 	{
 		Weapons.add(weapon);
+	}
+	public void removeWeapon(int index)
+	{
+		Weapons.remove(index);
+	}
+	public void removeWeapon(Weapon weapon)
+	{
+		Weapons.remove(weapon);
 	}
 	
 	
@@ -214,6 +230,14 @@ public class Room
 	{
 		Utilities.add(utility);
 	}
+	public void removeUtility(int index)
+	{
+		Utilities.remove(index);
+	}
+	public void removeUtility(Utility utility)
+	{
+		Utilities.remove(utility);
+	}
 	
 	
 	public ArrayList<Animal> getAnimals() 
@@ -239,6 +263,15 @@ public class Room
 	{
 		Animals.add(animal);
 	}
+	public void removeAnimal(int index)
+	{
+		Animals.remove(index);
+	}
+	public void removeAnimal(Animal animal)
+	{
+		Animals.remove(animal);
+	}
+	
 	
 	public ArrayList<Armor> getArmor() 
 	{
@@ -263,6 +296,15 @@ public class Room
 	{
 		Armor.add(armor);
 	}
+	public void removeArmor(int index)
+	{
+		Armor.remove(index);
+	}
+	public void removeArmor(Armor armor)
+	{
+		Armor.remove(armor);
+	}
+	
 	
 	public ArrayList<Crate> getCrate() 
 	{

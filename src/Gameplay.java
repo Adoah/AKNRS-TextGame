@@ -233,19 +233,44 @@ public class Gameplay
 		}	
 		if (parsed.equals("pick up"))
 		{
-			String itemName = "potato";
+			String itemName = in.nextLine().toLowerCase();
 			boolean itemExists = false;
+			//need to scan through every available object that a player can pick up in the room
+			//match the name to the name of each object
+			//ensure no duplicates
+			//then remove that one object from the arraylist in the room and put it in the players arraylist
+			//figure out something special for armor
+			
+			//scans through the weapons in the room
 			for(int i = 0; i < map.getMapAtPos(player.getPosition()).getBuilding(player.getCurrentBuilding()).getFloor(player.getCurrentFloor()).getRoom(player.getCurrentRoom()).getWeapons().size(); i++)
 			{
 				if(map.getMapAtPos(player.getPosition()).getBuilding(player.getCurrentBuilding()).getFloor(player.getCurrentFloor()).getRoom(player.getCurrentRoom()).getWeapon(i).getName().equals(itemName))
 				{
 					player.addWeapon(map.getMapAtPos(player.getPosition()).getBuilding(player.getCurrentBuilding()).getFloor(player.getCurrentFloor()).getRoom(player.getCurrentRoom()).getWeapon(i));
+					map.getMapAtPos(player.getPosition()).getBuilding(player.getCurrentBuilding()).getFloor(player.getCurrentFloor()).getRoom(player.getCurrentRoom()).removeWeapon(i);
+					System.out.println("You picked up the " + map.getMapAtPos(player.getPosition()).getBuilding(player.getCurrentBuilding()).getFloor(player.getCurrentFloor()).getRoom(player.getCurrentRoom()).getWeapon(i).getName());
 					itemExists = true;
 					break;
 				}
+			}
+			for(int i = 0; i < map.getMapAtPos(player.getPosition()).getBuilding(player.getCurrentBuilding()).getFloor(player.getCurrentFloor()).getRoom(player.getCurrentRoom()).getConsumables().size(); i++)
+			{
 				if(map.getMapAtPos(player.getPosition()).getBuilding(player.getCurrentBuilding()).getFloor(player.getCurrentFloor()).getRoom(player.getCurrentRoom()).getConsumable(i).getName().equals(itemName))
 				{
-					player.addConsumables(map.getMapAtPos(player.getPosition()).getBuilding(player.getCurrentBuilding()).getFloor(player.getCurrentFloor()).getRoom(player.getCurrentRoom()).getConsumable(i));
+					player.addConsumable(map.getMapAtPos(player.getPosition()).getBuilding(player.getCurrentBuilding()).getFloor(player.getCurrentFloor()).getRoom(player.getCurrentRoom()).getConsumable(i));
+					map.getMapAtPos(player.getPosition()).getBuilding(player.getCurrentBuilding()).getFloor(player.getCurrentFloor()).getRoom(player.getCurrentRoom()).removeConsumable(i);
+					System.out.println("You picked up the " + map.getMapAtPos(player.getPosition()).getBuilding(player.getCurrentBuilding()).getFloor(player.getCurrentFloor()).getRoom(player.getCurrentRoom()).getConsumable(i).getName());
+					itemExists = true;
+					break;
+				}
+			}
+			for(int i = 0; i < map.getMapAtPos(player.getPosition()).getBuilding(player.getCurrentBuilding()).getFloor(player.getCurrentFloor()).getRoom(player.getCurrentRoom()).getUtilities().size(); i++)
+			{
+				if(map.getMapAtPos(player.getPosition()).getBuilding(player.getCurrentBuilding()).getFloor(player.getCurrentFloor()).getRoom(player.getCurrentRoom()).getUtility(i).getName().equals(itemName))
+				{
+					player.addUtility(map.getMapAtPos(player.getPosition()).getBuilding(player.getCurrentBuilding()).getFloor(player.getCurrentFloor()).getRoom(player.getCurrentRoom()).getUtility(i));
+					map.getMapAtPos(player.getPosition()).getBuilding(player.getCurrentBuilding()).getFloor(player.getCurrentFloor()).getRoom(player.getCurrentRoom()).removeUtility(i);
+					System.out.println("You picked up the " + map.getMapAtPos(player.getPosition()).getBuilding(player.getCurrentBuilding()).getFloor(player.getCurrentFloor()).getRoom(player.getCurrentRoom()).getUtility(i).getName());
 					itemExists = true;
 					break;
 				}
