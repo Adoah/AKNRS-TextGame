@@ -1,3 +1,5 @@
+import java.util.Random;
+
 //animals are organic beings
 public class Animal 
 {
@@ -61,7 +63,7 @@ public class Animal
 	{
 		this.health = health;
 	}
-	public boolean isAlive() 
+	public boolean getAlive() 
 	{
 		return isAlive;
 	}
@@ -69,6 +71,7 @@ public class Animal
 	{
 		this.isAlive = isAlive;
 	}
+	//run getAlive after running this
 	public void checkAlive()
 	{
 		if(this.atkDmg <= 0)
@@ -89,26 +92,27 @@ public class Animal
 	{
 		this.temperament = temperament;
 	}
-	public double getHostility() 
+	public double getHostilityValue() 
 	{
 		return hostility;
+	}
+	public boolean getHostile()
+	{
+		Random random = new Random();
+		double randomValue = 0 + (1 - 0) * random.nextDouble();
+		if(randomValue < this.hostility)
+		{
+			return true;
+		}
+		else
+		{
+			return false;
+		}
 	}
 	public void setHostility(double hostility) 
 	{
 		this.hostility = hostility;
 	}
-	public void checkIsAlive()
-	{
-		if(this.health > 0)
-		{
-			this.isAlive = true;
-		}
-		else
-		{
-			this.isAlive = false;
-		}
-	}
-
 	public String getDescription() {
 		return description;
 	}

@@ -5,6 +5,7 @@ public class Consumable
 	private double healthRestored;
 	private double useTime;
 	private double nname;
+	private String name;
 	public double getWeight() 
 	{
 		return this.weight;
@@ -36,5 +37,13 @@ public class Consumable
 	public void setNname(double nname) 
 	{
 		this.nname = nname;
+	}
+	public String getName() 
+	{
+		return name;
+	}
+	public void setName(String name) 
+	{
+		this.name = name;
 	}
 }

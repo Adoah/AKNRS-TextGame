@@ -41,7 +41,7 @@ public class Gameplay
 		map.getMapAtPos(0, 0, 0).addBuildings(1);
 		//adding rooms (floors are added by default)
 		map.getMapAtPos(0, 0, 0).getBuilding(0).getFloor(0).addRooms(1);
-		
+		map.getMapAtPos(0, 0, 0).getBuilding(0).addFloors(1);
 		//adding a weapon
 		map.getMapAtPos(0, 0, 0).getBuilding(0).getFloor(1).getRoom(0).addWeapon(new Rifle());
 		//adding people
@@ -57,12 +57,14 @@ public class Gameplay
 		//testing description framework
 		map.getMapAtPos(0, 0, 0).setDescription("You are on a fortified island that overlooks the ocean. In the didstance there is a snowy forest at the edge of a beach.");
 		map.getMapAtPos(0, 0, 0).getBuilding(0).getFloor(0).getRoom(0).setDescription("You are in a heavily fortified bunker with 2 inch thick steel plating a DMR and Level two Armor rests on a work bench. There are 5 people in the room with you deep in conversation. Bonzo: The UN Officer, Ric (Codename Alfa): A UN soldier, Tom (Codename Bravo): A UN soldier, Vlademir: The Milita Leader, and Peter: A Militia Fighter. Bonzo the UN oficer turns around slowly and adresses you: Welcome, thanks for coming, as you know this situation here is pretty bad");
+		/*
 		String input = in.nextLine().toLowerCase();
 		String parsed = parseInput(input);
 		input = in.next().toLowerCase();
 		if (KEYPRESSED == true) {
 			map.getMapAtPos(0, 0, 0).getBuilding(0).getFloor(0).getRoom(0).setDescription("");
 		}
+		*/
 		
 		//map.getMapAtPos(0, 1, 0).setDescription("THIS IS A TEST STATING THAT YOU ARE IN A BARREN TUNDRA");
 		//map.getMapAtPos(0, 1, 0).addBuildings(1);
@@ -93,7 +95,7 @@ public class Gameplay
 			 ArrayList<Animal> hostileAnimals = new ArrayList<>();
 			 for(int i = 0; i < roomAnimals.size(); i++)
 			 {
-				 if(roomAnimals.get(i).getHostility() > .8)
+				 if(roomAnimals.get(i).getHostile())
 				 {
 					 hostileAnimals.add(roomAnimals.get(i));
 				 }
@@ -229,6 +231,30 @@ public class Gameplay
 			player.setCurrentFloor(-1);
 			player.setCurrentBuilding(-1);
 		}	
+		if (parsed.equals("pick up"))
+		{
+			String itemName = "potato";
+			boolean itemExists = false;
+			for(int i = 0; i < map.getMapAtPos(player.getPosition()).getBuilding(player.getCurrentBuilding()).getFloor(player.getCurrentFloor()).getRoom(player.getCurrentRoom()).getWeapons().size(); i++)
+			{
+				if(map.getMapAtPos(player.getPosition()).getBuilding(player.getCurrentBuilding()).getFloor(player.getCurrentFloor()).getRoom(player.getCurrentRoom()).getWeapon(i).getName().equals(itemName))
+				{
+					player.addWeapon(map.getMapAtPos(player.getPosition()).getBuilding(player.getCurrentBuilding()).getFloor(player.getCurrentFloor()).getRoom(player.getCurrentRoom()).getWeapon(i));
+					itemExists = true;
+					break;
+				}
+				if(map.getMapAtPos(player.getPosition()).getBuilding(player.getCurrentBuilding()).getFloor(player.getCurrentFloor()).getRoom(player.getCurrentRoom()).getConsumable(i).getName().equals(itemName))
+				{
+					player.addConsumables(map.getMapAtPos(player.getPosition()).getBuilding(player.getCurrentBuilding()).getFloor(player.getCurrentFloor()).getRoom(player.getCurrentRoom()).getConsumable(i));
+					itemExists = true;
+					break;
+				}
+			}
+			if(itemExists == false)
+			{
+				System.out.println("That item doesn't exist!");
+			}
+		}
 		//if floor++ or floor--, then say something like, you climb up the stairs
 		//same thing when changing rooms, say something like, "you enter a room with" ....
 		
@@ -265,7 +291,13 @@ public class Gameplay
 			System.out.println(player.getWeapons().get(i).getName());
 		}
 		Scanner scanner = new Scanner(System.in);
-		String input = scanner.nextLine();
+		int weaponSelection = scanner.nextInt();
+		if(target.getAlive())
+		{
+			//the math goes here. accounting for armor and HS probability. Make sure to decrement ammo!
+			//also add in supplementary math, such as wearing down the weapon
+			//target.setHealth(target.getHealth() - player.getWeapons().get(weaponSelection).getAtkDmg());
+		}
 		
 	}
 }

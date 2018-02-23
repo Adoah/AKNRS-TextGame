@@ -58,6 +58,10 @@ public class Player
 		this.currentFloor = this.currentFloor + delta;
 	}
 
+	public void addWeapon(Weapon weapon)
+	{
+		this.weapons.add(weapon);
+	}
 	public ArrayList<Weapon> getWeapons() 
 	{
 		return weapons;
@@ -66,12 +70,20 @@ public class Player
 	{
 		this.weapons = weapons;
 	}
+	public void addConsumables(Consumable consumable)
+	{
+		this.consumables.add(consumable);
+	}
 	public ArrayList<Consumable> getConsumables() {
 		return consumables;
 	}
 	public void setConsumables(ArrayList<Consumable> consumables) 
 	{
 		this.consumables = consumables;
+	}
+	public void addUtility(Utility utility)
+	{
+		this.Utility.add(utility);
 	}
 	public ArrayList<Utility> getUtility() 
 	{
@@ -80,6 +92,10 @@ public class Player
 	public void setUtility(ArrayList<Utility> utility) 
 	{
 		Utility = utility;
+	}
+	public void addHp(int hpToAdd)
+	{
+		this.hp = this.hp + hpToAdd;
 	}
 	public double getHp() 
 	{
