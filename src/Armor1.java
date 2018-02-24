@@ -11,7 +11,8 @@ public class Armor1 extends Armor {
 		  super.setWeight(1);
 		}
 		  
-		  public String toString(){
+		  public String toString()
+		  {
 		    return super.toString();
 		  }
 	

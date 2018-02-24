@@ -196,4 +196,8 @@ public class Player
 	{
 		this.armor = armor;
 	}
+	public void setWeapon(int index, Weapon weapon)
+	{
+		this.weapons.set(index, weapon);
+	}
 }

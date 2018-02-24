@@ -57,6 +57,7 @@ public class Gameplay
 		//testing description framework
 		map.getMapAtPos(0, 0, 0).setDescription("You are on a fortified island that overlooks the ocean. In the didstance there is a snowy forest at the edge of a beach.");
 		map.getMapAtPos(0, 0, 0).getBuilding(0).getFloor(0).getRoom(0).setDescription("You are in a heavily fortified bunker with 2 inch thick steel plating a DMR and Level two Armor rests on a work bench. There are 5 people in the room with you deep in conversation. Bonzo: The UN Officer, Ric (Codename Alfa): A UN soldier, Tom (Codename Bravo): A UN soldier, Vlademir: The Milita Leader, and Peter: A Militia Fighter. Bonzo the UN oficer turns around slowly and adresses you: Welcome, thanks for coming, as you know this situation here is pretty bad");
+		
 		/*
 		String input = in.nextLine().toLowerCase();
 		String parsed = parseInput(input);
@@ -80,6 +81,9 @@ public class Gameplay
 	@SuppressWarnings("unchecked")
 	public void turn()
 	{
+		//printing code
+		
+		
 		Scanner in = new Scanner(System.in);
 		//prints the description of the zone that the player has entered.
 		//map.getMapAtPos(player.getPosition()).toString();
@@ -91,28 +95,32 @@ public class Gameplay
 		if(parsed.contains("attack"))
 		{
 			//pull the enemies in the current room from the map into an isolated arraylist
-			 ArrayList<Animal> roomAnimals = (ArrayList<Animal>) map.getMapAtPos(player.getPosition()).getBuilding(player.getCurrentBuilding()).getFloor(player.getCurrentFloor()).getRoom(player.getCurrentRoom()).getAnimals().clone();
+			ArrayList<Animal> roomAnimals = (ArrayList<Animal>) map.getMapAtPos(player.getPosition()).getBuilding(player.getCurrentBuilding()).getFloor(player.getCurrentFloor()).getRoom(player.getCurrentRoom()).getAnimals().clone();
 			//figure out which animal is hostile
-			 ArrayList<Animal> hostileAnimals = new ArrayList<>();
-			 for(int i = 0; i < roomAnimals.size(); i++)
-			 {
-				 if(roomAnimals.get(i).getHostile())
-				 {
+			ArrayList<Animal> hostileAnimals = new ArrayList<>();
+			for(int i = 0; i < roomAnimals.size(); i++)
+			{
+				if(roomAnimals.get(i).getHostile())
+				{
 					 hostileAnimals.add(roomAnimals.get(i));
-				 }
-			 }
-			 System.out.println("What do you want to attack?");
-			 //prints the list of animals that are in the room, and indicates which are hostile
-			 for(int i = 0; i < roomAnimals.size(); i++)
-			 {
-				 //TODO figure out correct formatting system here
-				 String result = "";
-				 result = roomAnimals.get(i).toString() + " ";
-				 if(roomAnimals.get(i).getHostile())
-				 {
-					 result += "(HOSTILE)";
-				 }
-				 System.out.println(result);
+				}
+			}
+			System.out.println("What do you want to attack?");
+			//prints the list of animals that are in the room, and indicates which are hostile
+			for(int i = 0; i < roomAnimals.size(); i++)
+			{
+				//TODO figure out correct formatting system here
+				String result = "";
+				result = roomAnimals.get(i).toString() + " ";
+				if(roomAnimals.get(i).getHostile())
+				{
+					 result += "(HOSTILE)\n";
+				}
+				else
+				{
+					 result += "\n";
+				}
+				System.out.println(result);
 			 }
 			 //gets user input
 			 input = in.next().toLowerCase();
@@ -142,7 +150,7 @@ public class Gameplay
 		if(player.getCurrentBuilding() != -1)
 		{
 			//moving rooms between buildings
-			if(parsed.equals("left") || parsed.equals("right") || parsed.equals("forward") || parsed.equals("back")) 
+			if(parsed.equals("left") || parsed.equals("right") || parsed.equals("forward") || parsed.equals("back"))
 			{
 				//parsing for directions occurs in this function
 				int target = map.getMapAtPos(player.getPosition()).getBuilding(player.getCurrentBuilding()).getFloor(player.getCurrentFloor()).getRoom(player.getCurrentRoom()).getRoomInDirection(input);
@@ -292,7 +300,6 @@ public class Gameplay
 		}
 		//if floor++ or floor--, then say something like, you climb up the stairs
 		//same thing when changing rooms, say something like, "you enter a room with" ....
-		
 	}
 	public String parseInput(String input)
 	{
@@ -358,6 +365,8 @@ public class Gameplay
 					System.out.println("Your armor is too powerful! The enemy cannot harm you (until your armor breaks)!");
 				}
 			}
+			//replace the player's weapon
+			player.setWeapon(weaponSelection, weapon);
 		}
 		else
 		{
