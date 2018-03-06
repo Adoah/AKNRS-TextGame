@@ -27,6 +27,8 @@ public class Room
 	private int roomFront;
 	private int roomBack;
 	private boolean hasStaircase;
+	private boolean hasVisit;
+	private String Label;
 	
 	public Room()
 	{
@@ -341,6 +343,22 @@ public class Room
 	public String toString()
 	{
 		return "consumables: " + Consumables.toString() + ", Utilities: " + Utilities.toString() + ", Animals: " + Animals.toString() + ", Weapons: " + Weapons.toString();
+	}
+
+	public boolean getHasVisit() {
+		return hasVisit;
+	}
+
+	public void setHasVisit(boolean hasVisit) {
+		this.hasVisit = hasVisit;
+	}
+
+	public String getLabel() {
+		return Label;
+	}
+
+	public void setLabel(String label) {
+		Label = label;
 	}
 
 }

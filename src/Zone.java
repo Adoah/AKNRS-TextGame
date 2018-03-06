@@ -3,7 +3,9 @@ import java.util.ArrayList;
 public class Zone 
 {
 	private ArrayList<Building> buildings = new ArrayList<>();
-	private String description;
+	private String description = null;
+	private boolean hasVisit;
+	private String label;
 	public Zone()
 	{
 		
@@ -39,6 +41,18 @@ public class Zone
 	public String toString()
 	{
 		return this.description;
+	}
+	public boolean getHasVisit() {
+		return hasVisit;
+	}
+	public void setHasVisit(boolean hasVisit) {
+		this.hasVisit = hasVisit;
+	}
+	public String getLabel() {
+		return label;
+	}
+	public void setLabel(String label) {
+		this.label = label;
 	}
 	
 }

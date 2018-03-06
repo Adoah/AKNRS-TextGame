@@ -82,8 +82,29 @@ public class Gameplay
 	public void turn()
 	{
 		//printing code
-		
-		
+		//player is not in building
+		if(player.getCurrentBuilding() != -1)
+		{
+			if(map.getMapAtPos(player.getPosition()).getHasVisit())
+			{
+				System.out.println(map.getMapAtPos(player.getPosition()).getLabel());
+			}
+			else
+			{
+				System.out.println(map.getMapAtPos(player.getPosition()).getDescription());
+			}
+		}
+		else
+		{
+			if(map.getMapAtPos(player.getPosition()).getBuilding(player.getCurrentBuilding()).getFloor(player.getCurrentFloor()).getRoom(player.getCurrentRoom()).getHasVisit())
+			{
+				System.out.println(map.getMapAtPos(player.getPosition()).getBuilding(player.getCurrentBuilding()).getFloor(player.getCurrentFloor()).getRoom(player.getCurrentRoom()).getLabel());
+			}
+			else
+			{
+				System.out.println(map.getMapAtPos(player.getPosition()).getBuilding(player.getCurrentBuilding()).getFloor(player.getCurrentFloor()).getRoom(player.getCurrentRoom()).getDescription());
+			}
+		}
 		Scanner in = new Scanner(System.in);
 		//prints the description of the zone that the player has entered.
 		//map.getMapAtPos(player.getPosition()).toString();
@@ -146,6 +167,17 @@ public class Gameplay
 			//ask player who they want to attack
 			//if(parsed.contains(animal name)) then forge questioning the player
 			//follow same process for figuring out what weapon to use.
+		}
+		if(parsed.contains("description"))
+		{
+			if(player.getCurrentBuilding() != -1)
+			{
+					System.out.println(map.getMapAtPos(player.getPosition()).getDescription());
+			}
+			else
+			{
+					System.out.println(map.getMapAtPos(player.getPosition()).getBuilding(player.getCurrentBuilding()).getFloor(player.getCurrentFloor()).getRoom(player.getCurrentRoom()).getDescription());
+			}
 		}
 		if(player.getCurrentBuilding() != -1)
 		{
@@ -370,7 +402,7 @@ public class Gameplay
 		}
 		else
 		{
-			System.out.println("The target that you have selected is dead! There is no point wasting ammo!");
+			System.out.println("The target that you have selected is dead! There is no point wasting ammo or damaging your weapons!");
 		}
 		
 	}
