@@ -36,6 +36,8 @@ public class Gameplay
 		animals.get(3).setTemperament("relaxed");
 		animals.get(4).setTemperament("The most awesome");
 		
+		//				THIS IS THE STATRING SQUARE					//
+		
 		//this is actually useful
 		//adding buildings
 		map.getMapAtPos(0, 0, 0).addBuildings(1);
@@ -60,6 +62,13 @@ public class Gameplay
 		"You are in a heavily fortified bunker with 2 inch thick steel plating a DMR and Level two Armor rests on a work bench. \n"
 		+ " There are 5 people in the room with you deep in conversation. Bonzo: The UN Officer, Ric (Codename Alfa): A UN soldier, Tom (Codename Bravo): A UN soldier, Vlademir: The Milita Leader, and Peter: A Militia Fighter. \n"
 		+ " Bonzo the UN oficer turns around slowly and adresses you: Welcome, thanks for coming, as you know this situation here is pretty bad \n");
+		
+		//				THIS IS THE MAIN BASE WHERE THE VENDERS ARE AND WHERE YOU CAN GET MISSIONS			//
+		map.getMapAtPos(0, 0, 0).addBuildings(3);
+		
+		map.getMapAtPos(2, 0, 0).setDescription("You enter a semingly abandoned city. There are 3 buildings that are still standing, one has a picture of a rifle, one of body armor, and one of a wrench. \n"
+		+ "The upper floors of the buildings seem to be blocked off.");
+		map.getMapAtPos(0, 0, 0).getBuilding(0).getFloor(0).getRoom(0).setDescription("");
 		
 		/*
 		String input = in.nextLine().toLowerCase();
