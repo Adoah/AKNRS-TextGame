@@ -2,7 +2,8 @@ import java.util.ArrayList;
 
 public class Building 
 {
-	private static ArrayList<Floor> Floors = new ArrayList<>();
+	private ArrayList<Floor> Floors = new ArrayList<>();
+	private String description;
 	
 	public Building()
 	{
@@ -48,5 +49,11 @@ public class Building
 			s += Floors.get(i).toString();
 		}
 		return s;
+	}
+	public String getDescription() {
+		return description;
+	}
+	public void setDescription(String description) {
+		this.description = description;
 	}
 }

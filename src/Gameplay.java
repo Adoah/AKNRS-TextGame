@@ -1,17 +1,23 @@
+import java.lang.reflect.Array;
 import java.util.ArrayList;
 import java.util.Random;
 import java.util.Scanner;
+import java.util.StringTokenizer;
 
 
 public class Gameplay 
 {
 	//ArrayList<Building> buildings = new ArrayList<>();
+	public static boolean gameOver = false;
 	Map map = new Map();
 	Player player = new Player();
 	public Gameplay()
 	{
 		init();
-		turn();
+		while (gameOver == false)
+		{
+			turn();
+		}
 	}
 	//full world generation.
 	//might make it progressive in the future. As in it's executing as the person walks into each zone?? For ram efficiency???
@@ -95,7 +101,7 @@ public class Gameplay
 	{
 		//printing code
 		//player is not in building
-		if(player.getCurrentBuilding() != -1)
+		if(player.getCurrentBuilding() == -1)
 		{
 			if(map.getMapAtPos(player.getPosition()).getHasVisit())
 			{
@@ -108,13 +114,16 @@ public class Gameplay
 		}
 		else
 		{
-			if(map.getMapAtPos(player.getPosition()).getBuilding(player.getCurrentBuilding()).getFloor(player.getCurrentFloor()).getRoom(player.getCurrentRoom()).getHasVisit())
+			if(player.getCurrentBuilding() != -1 && player.getCurrentFloor() != -1 && player.getCurrentRoom() != -1)
 			{
-				System.out.println(map.getMapAtPos(player.getPosition()).getBuilding(player.getCurrentBuilding()).getFloor(player.getCurrentFloor()).getRoom(player.getCurrentRoom()).getLabel());
-			}
-			else
-			{
-				System.out.println(map.getMapAtPos(player.getPosition()).getBuilding(player.getCurrentBuilding()).getFloor(player.getCurrentFloor()).getRoom(player.getCurrentRoom()).getDescription());
+				if(map.getMapAtPos(player.getPosition()).getBuilding(player.getCurrentBuilding()).getFloor(player.getCurrentFloor()).getRoom(player.getCurrentRoom()).getHasVisit())
+				{
+					System.out.println(map.getMapAtPos(player.getPosition()).getBuilding(player.getCurrentBuilding()).getFloor(player.getCurrentFloor()).getRoom(player.getCurrentRoom()).getLabel());
+				}
+				else
+				{
+					System.out.println(map.getMapAtPos(player.getPosition()).getBuilding(player.getCurrentBuilding()).getFloor(player.getCurrentFloor()).getRoom(player.getCurrentRoom()).getDescription());
+				}
 			}
 		}
 		Scanner in = new Scanner(System.in);
@@ -180,9 +189,30 @@ public class Gameplay
 			//if(parsed.contains(animal name)) then forge questioning the player
 			//follow same process for figuring out what weapon to use.
 		}
-		if(parsed.contains("description"))
+		else if(parsed.contains("enter building"))
 		{
-			if(player.getCurrentBuilding() != -1)
+			if(map.getMapAtPos(player.getPosition()).getBuildings().size() == 1)
+			{
+				player.setCurrentBuilding(0);
+			}
+			else
+			{
+				StringTokenizer st = new StringTokenizer(input, " ");
+				int target = 0;
+				for(int i = 0; i < map.getMapAtPos(player.getPosition()).getBuildings().size(); i++)
+				{
+					if (map.getMapAtPos(player.getPosition()).getBuilding(i).getDescription().contains(st.nextToken()))
+					{
+						target = i;
+					}
+				}
+				player.setCurrentBuilding(target);
+			}
+		}
+		
+		else if(parsed.contains("description"))
+		{
+			if(player.getCurrentBuilding() == -1)
 			{
 					System.out.println(map.getMapAtPos(player.getPosition()).getDescription());
 			}
@@ -191,101 +221,91 @@ public class Gameplay
 					System.out.println(map.getMapAtPos(player.getPosition()).getBuilding(player.getCurrentBuilding()).getFloor(player.getCurrentFloor()).getRoom(player.getCurrentRoom()).getDescription());
 			}
 		}
-		if(player.getCurrentBuilding() != -1)
+		//moving rooms between buildings
+		if((parsed.equals("left") || parsed.equals("right") || parsed.equals("forward") || parsed.equals("back")) && (player.getCurrentBuilding() != -1))
 		{
-			//moving rooms between buildings
-			if(parsed.equals("left") || parsed.equals("right") || parsed.equals("forward") || parsed.equals("back"))
+			//parsing for directions occurs in this function
+			int target = map.getMapAtPos(player.getPosition()).getBuilding(player.getCurrentBuilding()).getFloor(player.getCurrentFloor()).getRoom(player.getCurrentRoom()).getRoomInDirection(input);
+			if(target != -1)
 			{
-				//parsing for directions occurs in this function
-				int target = map.getMapAtPos(player.getPosition()).getBuilding(player.getCurrentBuilding()).getFloor(player.getCurrentFloor()).getRoom(player.getCurrentRoom()).getRoomInDirection(input);
-				if(target != -1)
-				{
-					player.setCurrentRoom(target);
-					//prints description of the room that you just switched to.
-					System.out.println(map.getMapAtPos(player.getPosition()).getBuilding(player.getCurrentBuilding()).getFloor(player.getCurrentFloor()).getRoom(player.getCurrentRoom()).toString());
-				}
-				System.out.println("There is no room that way!");
+				player.setCurrentRoom(target);
+				//prints description of the room that you just switched to.
+				System.out.println(map.getMapAtPos(player.getPosition()).getBuilding(player.getCurrentBuilding()).getFloor(player.getCurrentFloor()).getRoom(player.getCurrentRoom()).toString());
 			}
-			//switching floors
-			if(parsed.equals("upstairs") || parsed.equals("downstairs"))
+			System.out.println("There is no room that way!");
+		}
+		//switching floors
+		if((parsed.equals("upstairs") || parsed.equals("downstairs")) && (player.getCurrentBuilding() != -1))
+		{
+			int delta = 0;
+			if(parsed.equals("upstairs"))
 			{
-				int delta = 0;
-				if(parsed.equals("upstairs"))
+				delta = 1;
+			}
+			if(parsed.equals("downstairs"))
+			{
+				delta = -1;
+			}
+			//checking if floor exists
+			int totalFloorsOfBuilding = map.getMapAtPos(player.getPosition()).getBuilding(player.getCurrentBuilding()).getNumberOfFloors();
+			//checking if there is a floor above
+			if(totalFloorsOfBuilding - player.getCurrentFloor() > 0 && player.getCurrentFloor() > 0)
+			{
+				//have to check if player is in the room with the staircase
+				boolean staircase = map.getMapAtPos(player.getPosition()).getBuilding(player.getCurrentBuilding()).getFloor(player.getCurrentFloor()).getRoom(player.getCurrentRoom()).getHasStaircase();
+				if(staircase)
 				{
-					delta = 1;
-				}
-				if(parsed.equals("downstairs"))
-				{
-					delta = -1;
-				}
-				if(player.getCurrentBuilding() != -1)
-				{
-					//checking if floor exists
-					int totalFloorsOfBuilding = map.getMapAtPos(player.getPosition()).getBuilding(player.getCurrentBuilding()).getNumberOfFloors();
-					//checking if there is a floor above
-					if(totalFloorsOfBuilding - player.getCurrentFloor() > 0 && player.getCurrentFloor() > 0)
+					//changes floor
+					player.changeFloor(delta);
+					//switching current room to the room with the staircase on the new floor.
+					int amtOfRooms = map.getMapAtPos(player.getPosition()).getBuilding(player.getCurrentBuilding()).getFloor(player.getCurrentFloor()).getRooms().size();
+					for(int i = 0; i < amtOfRooms; i++)
 					{
-						//have to check if player is in the room with the staircase
-						boolean staircase = map.getMapAtPos(player.getPosition()).getBuilding(player.getCurrentBuilding()).getFloor(player.getCurrentFloor()).getRoom(player.getCurrentRoom()).getHasStaircase();
-						if(staircase)
+						if(map.getMapAtPos(player.getPosition()).getBuilding(player.getCurrentBuilding()).getFloor(player.getCurrentFloor()).getRoom(i).getHasStaircase())
 						{
-							//changes floor
-							player.changeFloor(delta);
-							//switching current room to the room with the staircase on the new floor.
-							int amtOfRooms = map.getMapAtPos(player.getPosition()).getBuilding(player.getCurrentBuilding()).getFloor(player.getCurrentFloor()).getRooms().size();
-							for(int i = 0; i < amtOfRooms; i++)
-							{
-								if(map.getMapAtPos(player.getPosition()).getBuilding(player.getCurrentBuilding()).getFloor(player.getCurrentFloor()).getRoom(i).getHasStaircase())
-								{
-									player.setCurrentRoom(i);
-								}
-							}
-							//prints the description of the room that you have just entered.
-							System.out.println(map.getMapAtPos(player.getPosition()).getBuilding(player.getCurrentBuilding()).getFloor(player.getCurrentFloor()).getRoom(player.getCurrentRoom()).toString());
-						}
-						else
-						{
-							System.out.println("There is no staircase to go up in this room!");
+							player.setCurrentRoom(i);
 						}
 					}
-					else
-					{
-						System.out.println("There is no floor there!");
-					}
+					//prints the description of the room that you have just entered.
+					System.out.println(map.getMapAtPos(player.getPosition()).getBuilding(player.getCurrentBuilding()).getFloor(player.getCurrentFloor()).getRoom(player.getCurrentRoom()).toString());
 				}
 				else
 				{
-					System.out.println("You are not in a building!");
+					System.out.println("There is no staircase to go up in this room!");
 				}
 			}
-			//TODO change this text
-			if(parsed.equals("other building"))
+			else
 			{
-				int totalBuildings = map.getMapAtPos(player.getPosition()).getBuildings().size();
-				if(totalBuildings > 1)
-				{
-					//prompt what building you want to switch into, and indicate which building you are in.
-					System.out.println("What building do you want to enter?");
-					for(int i = 1; i < totalBuildings + 1; i++)
-					{
-						if(i == player.getCurrentBuilding() + 1)
-						{
-							System.out.println("Building " + i + "(You are here)");
-						}
-						else
-						{
-							System.out.println("Building " + i);
-						}
-					}
-					//accept user input
-					int questionAnswer = in.nextInt();
-					//switch to building, and reset all values
-					player.setCurrentBuilding(questionAnswer);
-					player.setCurrentFloor(0);
-					player.setCurrentRoom(0);
-				}
+				System.out.println("There is no floor there!");
 			}
-		}		
+		}
+		//TODO change this text
+		if(parsed.equals("other building"))
+		{
+			int totalBuildings = map.getMapAtPos(player.getPosition()).getBuildings().size();
+			if(totalBuildings > 1)
+			{
+				//prompt what building you want to switch into, and indicate which building you are in.
+				System.out.println("What building do you want to enter?");
+				for(int i = 1; i < totalBuildings + 1; i++)
+				{
+					if(i == player.getCurrentBuilding() + 1)
+					{
+						System.out.println("Building " + i + "(You are here)");
+					}
+					else
+					{
+						System.out.println("Building " + i);
+					}
+				}
+				//accept user input
+				int questionAnswer = in.nextInt();
+				//switch to building, and reset all values
+				player.setCurrentBuilding(questionAnswer);
+				player.setCurrentFloor(0);
+				player.setCurrentRoom(0);
+			}
+		}	
 		//leaving buildings entirely
 		if(parsed.equals("leave"))
 		{
