@@ -67,7 +67,8 @@ public class Gameplay
 		map.getMapAtPos(0, 0, 0).getBuilding(0).getFloor(0).getRoom(0).setDescription(
 		"You are in a heavily fortified bunker with 2 inch thick steel plating a DMR and Level two Armor rests on a work bench. \n"
 		+ " There are 5 people in the room with you deep in conversation. Bonzo: The UN Officer, Ric (Codename Alfa): A UN soldier, Tom (Codename Bravo): A UN soldier, Vlademir: The Milita Leader, and Peter: A Militia Fighter. \n"
-		+ " Bonzo the UN oficer turns around slowly and adresses you: Welcome, thanks for coming, as you know this situation here is pretty bad \n");
+		+ " Bonzo the UN oficer turns around slowly and adresses you: Welcome, thanks for coming, as you know this situation here is pretty bad. \n"
+		+ "As you know the goverment has developed a new chemical wepon that makes things agresive. \n");
 		
 		//				THIS IS THE MAIN BASE WHERE THE VENDERS ARE AND WHERE YOU CAN GET MISSIONS			//
 		map.getMapAtPos(0, 0, 0).addBuildings(3);
