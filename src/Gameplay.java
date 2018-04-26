@@ -63,7 +63,7 @@ public class Gameplay
 		Scanner in = new Scanner(System.in);
 		
 		//testing description framework
-		map.getMapAtPos(0, 0, 0).setDescription("You are on a fortified island that overlooks the ocean. In the didstance there is a snowy forest at the edge of a beach.");
+		map.getMapAtPos(0, 0, 0).setDescription("You are on a fortified island that overlooks the ocean. In the didstance there is a snowy forest at the edge of a beach. There are 3 boats on the shore, a Cigarette Boat, a Yacht, and a Motor Boat watiting to take you to shore.");
 		map.getMapAtPos(0, 0, 0).getBuilding(0).getFloor(0).getRoom(0).setDescription(
 		"You are in a heavily fortified bunker with 2 inch thick steel plating a DMR and Level two Armor rests on a work bench. \n"
 		+ " There are 5 people in the room with you deep in conversation. Bonzo: The UN Officer, Ric (Codename Alfa): A UN soldier, Tom (Codename Bravo): A UN soldier, Vlademir: The Milita Leader, and Peter: A Militia Fighter. \n"
