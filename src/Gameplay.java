@@ -76,10 +76,10 @@ public class Gameplay
 		map.getMapAtPos(2, 0, 0).addBuildings(3);
 		map.getMapAtPos(2, 0, 0).getBuilding(0).getFloor(0).addRooms(1);
 		map.getMapAtPos(2, 0, 0).getBuilding(0).addFloors(1);
+		map.getMapAtPos(2, 0, 0).getBuilding(1).getFloor(0).addRooms(1);
+		map.getMapAtPos(2, 0, 0).getBuilding(1).addFloors(1);
 		map.getMapAtPos(2, 0, 0).getBuilding(2).getFloor(0).addRooms(1);
 		map.getMapAtPos(2, 0, 0).getBuilding(2).addFloors(1);
-		map.getMapAtPos(2, 0, 0).getBuilding(3).getFloor(0).addRooms(1);
-		map.getMapAtPos(2, 0, 0).getBuilding(3).addFloors(1);
 		
 		map.getMapAtPos(2, 0, 0).setDescription("You enter a semingly abandoned city. There are 3 buildings that are still standing, one has a picture of a rifle, one of body armor, and one of a wrench. \n"
 		+ "The upper floors of the buildings seem to be blocked off.");
