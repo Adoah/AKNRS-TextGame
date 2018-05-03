@@ -60,7 +60,7 @@ public class Gameplay
 		map.getMapAtPos(0, 0, 0).getBuilding(0).getFloor(0).getRoom(0).addAnimal(new Human("Peter", "Militia fighter"));
 		map.getMapAtPos(0, 0, 0).getBuilding(0).getFloor(0).getRoom(0).addWeapon(new DMR());
 		map.getMapAtPos(0, 0, 0).getBuilding(0).getFloor(0).getRoom(0).addArmor(new Armor2());
-		map.getMapAtPos(0, 0, 0).setLabel("Welcome to Hell");
+		map.getMapAtPos(0, 0, 0).setLabel("Alex just got distracted by boobies on his phone");
 		Scanner in = new Scanner(System.in);
 		
 		//testing description framework
