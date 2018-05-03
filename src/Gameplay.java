@@ -60,7 +60,7 @@ public class Gameplay
 		map.getMapAtPos(0, 0, 0).getBuilding(0).getFloor(0).getRoom(0).addAnimal(new Human("Peter", "Militia fighter"));
 		map.getMapAtPos(0, 0, 0).getBuilding(0).getFloor(0).getRoom(0).addWeapon(new DMR());
 		map.getMapAtPos(0, 0, 0).getBuilding(0).getFloor(0).getRoom(0).addArmor(new Armor2());
-		map.getMapAtPos(0, 0, 0).setLabel("Equipment Store");
+		map.getMapAtPos(0, 0, 0).setLabel("Island Base");
 		Scanner in = new Scanner(System.in);
 		
 		//testing description framework
@@ -86,7 +86,7 @@ public class Gameplay
 		map.getMapAtPos(0, 0, 0).getBuilding(0).getFloor(0).getRoom(0).setDescription("This building has a Big Sign with a Red cross that is just bairly hanging onto the building");
 		map.getMapAtPos(0, 0, 0).getBuilding(0).getFloor(0).getRoom(0).addAnimal(new Human("Peter", "Militia fighter"));
 		
-		map.getMapAtPos(0, 0, 0).setLabel("The Left Cheek");
+		map.getMapAtPos(0, 0, 0).setLabel("Equipment Store");
 		
 		/*
 		String input = in.nextLine().toLowerCase();
