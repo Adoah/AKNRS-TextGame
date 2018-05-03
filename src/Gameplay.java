@@ -61,7 +61,6 @@ public class Gameplay
 		map.getMapAtPos(0, 0, 0).getBuilding(0).getFloor(0).getRoom(0).addWeapon(new DMR());
 		map.getMapAtPos(0, 0, 0).getBuilding(0).getFloor(0).getRoom(0).addArmor(new Armor2());
 		map.getMapAtPos(0, 0, 0).setLabel("Island Base");
-		Scanner in = new Scanner(System.in);
 		
 		//testing description framework
 		map.getMapAtPos(0, 0, 0).setDescription("You are on a fortified island that overlooks the ocean. In the didstance there is a snowy forest at the edge of a beach. \n"
@@ -73,20 +72,27 @@ public class Gameplay
 		+ "As you know the goverment has developed a new chemical wepon that makes things agresive. \n");
 		
 		//				THIS IS THE MAIN BASE WHERE THE VENDERS ARE AND WHERE YOU CAN GET MISSIONS			//
-		map.getMapAtPos(2, 0, 0).addBuildings(3);
-		map.getMapAtPos(2, 0, 0).getBuilding(0).getFloor(0).addRooms(1);
-		map.getMapAtPos(2, 0, 0).getBuilding(0).addFloors(1);
-		map.getMapAtPos(2, 0, 0).getBuilding(1).getFloor(0).addRooms(1);
-		map.getMapAtPos(2, 0, 0).getBuilding(1).addFloors(1);
-		map.getMapAtPos(2, 0, 0).getBuilding(2).getFloor(0).addRooms(1);
-		map.getMapAtPos(2, 0, 0).getBuilding(2).addFloors(1);
+		map.getMapAtPos(1, 0, 0).addBuildings(3);
+		map.getMapAtPos(1, 0, 0).getBuilding(0).getFloor(0).addRooms(1);
+		map.getMapAtPos(1, 0, 0).getBuilding(0).addFloors(1);
+		map.getMapAtPos(1, 0, 0).getBuilding(1).getFloor(0).addRooms(1);
+		map.getMapAtPos(1, 0, 0).getBuilding(1).addFloors(1);
+		map.getMapAtPos(1, 0, 0).getBuilding(2).getFloor(0).addRooms(1);
+		map.getMapAtPos(1, 0, 0).getBuilding(2).addFloors(1);
 		
-		map.getMapAtPos(2, 0, 0).setDescription("You enter a semingly abandoned city. There are 3 buildings that are still standing, one has a picture of a rifle, one of body armor, and one of a wrench. \n"
+		map.getMapAtPos(1, 0, 0).setDescription("You enter a semingly abandoned city. There are 3 buildings that are still standing, one has a picture of a rifle, one of body armor, and one of a wrench. \n"
 		+ "The upper floors of the buildings seem to be blocked off.");
-		map.getMapAtPos(0, 0, 0).getBuilding(0).getFloor(0).getRoom(0).setDescription("This building has a Big Sign with a Red cross that is just bairly hanging onto the building");
-		map.getMapAtPos(0, 0, 0).getBuilding(0).getFloor(0).getRoom(0).addAnimal(new Human("Peter", "Militia fighter"));
+		map.getMapAtPos(1, 0, 0).getBuilding(0).getFloor(0).getRoom(0).setDescription("This building has a Big Sign with a Red cross that is just bairly hanging onto the building");
+		map.getMapAtPos(1, 0, 0).getBuilding(0).getFloor(0).getRoom(0).addAnimal(new Human("Peter", "UN Officer"));
 		
-		map.getMapAtPos(0, 0, 0).setLabel("Equipment Store");
+		map.getMapAtPos(1, 0, 0).getBuilding(1).getFloor(0).getRoom(0).setDescription("This building has a Big Sign with a peice of ammo painted on it that is just bairly hanging onto the building");
+		map.getMapAtPos(1, 0, 0).getBuilding(1).getFloor(0).getRoom(0).addAnimal(new Human("Vlademir", "Militia fighter"));
+		
+		map.getMapAtPos(1, 0, 0).getBuilding(2).getFloor(0).getRoom(0).setDescription("This building has a Big Sign with a Wrench painted on that is just bairly hanging onto the building");
+		map.getMapAtPos(1, 0, 0).getBuilding(2).getFloor(0).getRoom(0).addAnimal(new Human("Erin", "Refugee"));
+		
+		map.getMapAtPos(1, 0, 0).setLabel("Equipment Store");
+		
 		
 		/*
 		String input = in.nextLine().toLowerCase();
